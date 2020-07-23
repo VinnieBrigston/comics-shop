@@ -1,0 +1,40 @@
+.form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 576px;
+  width: 70%;
+}
+
+.label {
+  display: flex;
+  font-size: 16px;
+  flex-direction: column;
+  width: 100%;
+  span {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  font-size: 16px;
+  padding: 8px;
+  width: 100%;
+}
+
+.submit {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  padding: 4px 8px;
+}
