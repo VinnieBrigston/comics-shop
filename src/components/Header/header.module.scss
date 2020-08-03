@@ -1,6 +1,7 @@
 .header {
   align-items: center;
   border-bottom: 1px solid #000;
+  box-sizing: border-box;
   justify-content: flex-end;
   display: flex;
   padding: 16px;
@@ -31,4 +32,32 @@
     color: #fff;
     transition:.3s;
   }
+}
+
+.profile {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  width: 34px;
+  img {
+    display: inline-block;
+    width: 100%;
+  }
+  &.active,
+  &.focus {
+    outline: none;
+  }
+}
+
+.logout {
+  border: 1px solid #000;
+  border-radius: 4px;
+  color: #000;
+  font-size: 16px;
+  padding: 8px 16px;
+  text-decoration: none;
 }

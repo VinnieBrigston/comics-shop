@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import formClasses from '../../../common/styles/form.module.scss';
 
 export const Input = (props) => {
-  const { placeholder,value,onChange,type,className } = props;
+  const { elementConfig,value,onChange } = props;
   return (
-    <input
-      className={className}
-      type={type}
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-    />
-  )
+    <div className={formClasses.Input}>
+      <label className={formClasses.label}>{props.label}</label>
+      <input
+        className={formClasses.input}
+        {...elementConfig}
+        onChange={onChange}
+        value={value}
+      />
+    </div>
+  );
 };
 
 Input.defaultProps = {
