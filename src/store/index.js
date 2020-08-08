@@ -9,13 +9,13 @@ let store = null;
 
 const preloadedData = loadState('shopAuthState');
 
-if(preloadedData){
-  store = createStore(rootReducer,preloadedData, composeEnhancers(
-    applyMiddleware(thunk)
+if (preloadedData) {
+  store = createStore(rootReducer, preloadedData, composeEnhancers(
+    applyMiddleware(thunk),
   ));
-}else {
+} else {
   store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
   ));
 }
 

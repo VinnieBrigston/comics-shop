@@ -11,4 +11,4 @@ export const Controls = () => (
       <Link to="/login" className={classes.link}>Sign In</Link>
     </li>
   </ul>
-)
+);

@@ -1,39 +1,39 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { useHistory } from "react-router-dom";
+import PropTypes from 'prop-types';
 import classes from './header.module.scss';
+import LogoutButton from './LogoutButton';
 
 const modalStyles = {
-  content : {
+  content: {
     bottom: 'auto',
     left: 'auto',
     right: '1%',
     top: '9%',
     maxHeight: '250px',
     maxWidth: '250px',
-  }
+  },
 };
 
-const LogoutButton = (props) => {
-  const history = useHistory();
-  const handleClick = () => {
-    props.clickHandler();
-    history.push('/logout');
-  };
-  return (
-    <button className={classes.logout} onClick={handleClick}>Logout</button>
-  )
-}
-
 export const ProfileModal = (props) => {
+  const { showModal, toggleProfileModal } = props;
   return (
-    <Modal 
-      isOpen={props.showModal}
-      onRequestClose={props.toggleProfileModal}
+    <Modal
+      isOpen={showModal}
+      onRequestClose={toggleProfileModal}
       shouldCloseOnOverlayClick={true}
       style={modalStyles}
     >
       <LogoutButton className={classes.logout} clickHandler={props.toggleProfileModal} />
     </Modal>
-  ) 
-}
+  );
+};
+
+ProfileModal.defaultProps = {
+  showModal: false,
+};
+
+ProfileModal.propTypes = {
+  toggleProfileModal: PropTypes.func.isRequired,
+  showModal: PropTypes.bool,
+};

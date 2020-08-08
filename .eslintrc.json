@@ -1,8 +1,9 @@
 /*eslint linebreak-style: ["error", "windows"]*/
+/*eslint space-in-parens: ["error", "never"]*/
+
 {
   "extends": [
-    "airbnb",
-    "plugin:cypress/recommended"
+    "airbnb"
   ],
   "parser": "babel-eslint",
   "env": {
@@ -21,9 +22,6 @@
   "settings": {
     "import/resolver": "webpack"
   },
-  "plugins": [
-    "cypress"
-  ],
   "rules": {
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-noninteractive-element-interactions": 0,
@@ -64,4 +62,4 @@
     "consistent-return": 0,
     "import/no-cycle": 0
   }
-}
+} 
