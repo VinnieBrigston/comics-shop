@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import classes from './header.module.scss';
-import LogoutButton from './LogoutButton';
+import { LogoutButton } from './LogoutButton';
 
 const modalStyles = {
   content: {

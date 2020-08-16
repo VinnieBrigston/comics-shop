@@ -15,9 +15,11 @@ const LogoutButton = (props) => {
   );
 };
 
-export default connect(null, { logout })(LogoutButton);
-
 LogoutButton.propTypes = {
   clickHandler: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
 };
+
+const Enhanced = connect(null, { logout })(LogoutButton);
+
+export { Enhanced as LogoutButton };

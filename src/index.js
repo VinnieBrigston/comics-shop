@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { Main } from './containers/Main';
 import store from './store';
-import Registration from './containers/Registration';
-import Login from './containers/Login';
+import { Registration } from './containers/Registration';
+import { Login } from './containers/Login';
+import 'normalize.css';
 
 ReactDOM.render(
   <Provider store={store}>

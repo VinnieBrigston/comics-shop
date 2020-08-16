@@ -7,11 +7,8 @@
   max-width: 400px;
   width: 70%;
   input {
-    &:not(:last-of-type) {
-      margin-bottom: 20px;
-    }
-    &:last-of-type {
-      margin-bottom: 60px;
+    &:not(:first-of-type) {
+      margin-top: 20px;
     }
   }
 }
@@ -27,7 +24,7 @@
 
 .authTitle {
   color: #fff;
-  font-family: $font-secondary;
+  font-family: $font-secondary, sans-serif;
   font-size: 52px;
   text-transform: uppercase;
   font-weight: bold;
@@ -40,10 +37,17 @@
   border: none;
   color: #CCCCCC;
   font-size: 18px;
-  font-family: $font-primary;
+  font-family: $font-primary, sans-serif;
   display: inline-block;
   padding: 13px 15px;
   width: 100%;
+  &:focus {
+    outline: 1px solid #ADD17E;
+  }
+  &_withError {
+    border: 1px solid #d23a3a;
+    outline: none;
+  }
 }
 
 .authSubmit {
@@ -51,9 +55,10 @@
   border: none;
   color: #232323;
   cursor: pointer;
-  font-family: $font-secondary;
+  font-family: $font-secondary, sans-serif;
   font-size: 28px;
   font-weight: bold;
+  margin-top: 60px;
   padding: 16px;
   text-transform: uppercase;
   transition: .1s;
@@ -82,7 +87,7 @@
 .authLink {
   color: #ADD17E;
   display: inline-block;
-  font-family: $font-secondary;
+  font-family: $font-secondary, sans-serif;
   font-size: 24px;
   text-decoration: none;
   text-transform: uppercase;
@@ -114,4 +119,13 @@
 
 .socialIcon {
   display: inline-block;
+}
+
+.errorMessage {
+  color: #d23a3a;
+  font-family: $font-primary;
+  font-size: 14px;
+  line-height: 1;
+  margin: 8px 0 0 0;
+  width: 100%;
 }

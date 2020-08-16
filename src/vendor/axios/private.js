@@ -5,6 +5,10 @@ const privateInstance = axios.create({
 });
 
 
+export const configurateInterceptors = (token) => {
+  privateInstance.defaults.headers.common.authorization = `${token}`;
+};
+
 privateInstance.interceptors.response.use(
   res => {
     const token = res.headers && res.headers.authorization;
@@ -19,9 +23,5 @@ privateInstance.interceptors.response.use(
     Promise.reject(error);
   },
 );
-
-export const configurateInterceptors = (token) => {
-  privateInstance.defaults.headers.common.authorization = `${token}`;
-};
 
 export default privateInstance;

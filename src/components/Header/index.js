@@ -38,7 +38,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+const Enhanced = connect(mapStateToProps)(Header);
+
+export { Enhanced as Header };
 
 Header.defaultProps = {
   isAuthenticated: false,

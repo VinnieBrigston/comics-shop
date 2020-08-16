@@ -1,13 +1,13 @@
 import axios from '../vendor/axios';
 import { configurateInterceptors } from '../vendor/axios/private';
 import { AUTH_START, AUTH_SUCCESS, AUTH_LOGOUT } from './types';
-import { saveState } from '../helpers/localStorage';
+import { saveState, removeState } from '../helpers/localStorage';
 
-export const authStart = () => {
-  return {
+export const authStart = () => (
+  {
     type: AUTH_START,
-  };
-};
+  }
+);
 
 export const authSuccess = (token, userId) => {
   return {
@@ -18,53 +18,43 @@ export const authSuccess = (token, userId) => {
 };
 
 export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
+  removeState('shopAuthState');
   return {
     type: AUTH_LOGOUT,
   };
 };
 
-export const register = ({ name, email, password }) => {
-  return dispatch => {
-    dispatch(authStart());
-    const data = { name, email, password };
-    axios.post('auth/registration', data)
-      .then(res => {
-        const token = res.headers.authorization;
-        const userId = res.data._id;
-        // localStorage.setItem('token', token);
-        // localStorage.setItem('userId', userId);
-        saveState({
-          auth: {
-            token,
-            userId,
-          },
-        }, 'shopAuthState');
-        configurateInterceptors(token);
-        dispatch(authSuccess(token, userId));
-      });
-  };
+export const register = ({ name, email, password }) => (dispatch) => {
+  dispatch(authStart());
+  axios.post('auth/registration', { name, email, password })
+    .then(res => {
+      const token = res.headers.authorization;
+      const userId = res.data._id;
+      saveState({
+        auth: {
+          token,
+          userId,
+        },
+      }, 'shopAuthState');
+      configurateInterceptors(token);
+      dispatch(authSuccess(token, userId));
+    });
 };
 
-export const login = ({ email, password }) => {
-  return dispatch => {
-    dispatch(authStart());
-    const data = { email, password };
-    axios.post('auth/login', data)
-      .then(res => {
-        const token = res.headers.authorization;
-        const userId = res.data._id;
-        // localStorage.setItem('token', token);
-        // localStorage.setItem('userId', userId);
-        saveState({
-          auth: {
-            token,
-            userId,
-          },
-        }, 'shopAuthState');
-        configurateInterceptors(token);
-        dispatch(authSuccess(token, userId));
-      });
-  };
+export const login = ({ email, password }) => (dispatch) => {
+  dispatch(authStart());
+  const data = { email, password };
+  axios.post('auth/login', data)
+    .then(res => {
+      const token = res.headers.authorization;
+      const userId = res.data._id;
+      saveState({
+        auth: {
+          token,
+          userId,
+        },
+      }, 'shopAuthState');
+      configurateInterceptors(token);
+      dispatch(authSuccess(token, userId));
+    });
 };
