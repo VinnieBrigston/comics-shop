@@ -1,16 +1,51 @@
-import React,{ memo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Profile } from './Profile';
+import { Controls } from './Controls';
+import { ProfileModal } from './modal';
 import classes from './header.module.scss';
 
-export const Header = memo(() => (
-  <div className={classes.header}>
-    <ul className={classes.suggestions}>
-      <li>
-        <Link to="/register" className={classes.link}>Sign Up</Link>
-      </li>
-      <li>
-        <Link to="/login" className={classes.link}>Sign In</Link>
-      </li>
-    </ul>
-  </div>
-))
+class Header extends Component {
+  state = {
+    showProfileModal: false,
+  }
+
+  toggleProfileModal = () => {
+    this.setState(({ showProfileModal }) => ({ showProfileModal: !showProfileModal }));
+  }
+
+
+  render() {
+    return (
+      <div className={classes.header}>
+        { this.props.isAuthenticated
+          ? <Profile openModal={this.toggleProfileModal} />
+          : <Controls />
+        }
+        <ProfileModal
+          showModal={this.state.showProfileModal}
+          toggleProfileModal={this.toggleProfileModal}
+        />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: !!state.auth.token,
+  };
+};
+
+const Enhanced = connect(mapStateToProps)(Header);
+
+export { Enhanced as Header };
+
+Header.defaultProps = {
+  isAuthenticated: false,
+};
+
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};

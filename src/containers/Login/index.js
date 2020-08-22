@@ -1,65 +1,45 @@
-import React,{ Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from '../../vendor/axios';
-import { Input } from '../../components/Form/Input';
-import { saveToken } from '../../actions';
+import { Form } from './LoginForm';
+import { SocialMediaAuth } from '../../components/SocialMedia/SocialMediaBlock';
 import loginPageClasses from './login.module.scss';
 import formClasses from '../../common/styles/form.module.scss';
+import closeIcon from '../../assets/images/icons/close.svg';
+import { REGISTER_URL, HOME_URL } from '../../constants/routes';
 
-export class Login extends Component{
-
-  state = {
-    email: '',
-    password: ''
-  }
-
-  onFormInputChange = field => e => { 
-    this.setState({
-      [field]: e.target.value
-    })
-  }
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { email,password } = this.state;
-    const data = { email,password };
-    axios.post('auth/login',data)
-      .then(res => {
-        console.log('res',res)
-        this.setState({
-          email: '',
-          password: ''
-        })
-    })
-
-  }
-
-  render() {
-    return(
+const Login = (props) => {
+  return props.isAuthenticated
+    ? <Redirect to={HOME_URL} />
+    : (
       <div className={loginPageClasses.wrapper}>
-        <form onSubmit={this.onSubmit} className={formClasses.form}>
-          <label className={formClasses.label}>
-            <span>Email</span>
-            <Input
-              value={this.state.email} 
-              placeholder="Enter your email"
-              onChange={this.onFormInputChange('email')}
-              className={formClasses.input}
-            />
-          </label>
-          <label className={formClasses.label}>
-            <span>Password</span>
-            <Input
-              value={this.state.password} 
-              placeholder="Enter your password"
-              onChange={this.onFormInputChange('password')}
-              type="password"
-              className={formClasses.input}
-            />
-          </label>
-          <button type="submit" className={formClasses.submit}>Submit</button>
-        </form>
+        <h2 className={formClasses.authTitle}>login</h2>
+        <SocialMediaAuth />
+        <Form />
+        <Link to={REGISTER_URL} className={formClasses.authLink}>registration</Link>
+        <Link to={HOME_URL} className={formClasses.authBackLink}>
+          <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
+        </Link>
       </div>
-    )
-  }
-}
+    );
+};
+
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    isAuthenticated: !!state.auth.token,
+  };
+};
+
+const Enhanced = connect(mapStateToProps)(Login);
+
+export { Enhanced as Login };
+
+Login.defaultProps = {
+  isAuthenticated: false,
+};
+
+Login.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};

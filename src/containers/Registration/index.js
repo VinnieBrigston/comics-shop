@@ -1,77 +1,45 @@
-import React,{ Component } from 'react';
-import axios from '../../vendor/axios';
-import { Input } from '../../components/Form/Input'
-import wrapperClasses from './registration.module.scss';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 import formClasses from '../../common/styles/form.module.scss';
+import { Form } from './RegistrationForm';
+import { SocialMediaAuth } from '../../components/SocialMedia/SocialMediaBlock';
+import closeIcon from '../../assets/images/icons/close.svg';
+import registrationClasses from './registration.module.scss';
+import { LOGIN_URL, HOME_URL } from '../../constants/routes';
 
-export class Registration extends Component{
-
-  state = {
-    name: '',
-    email: '',
-    password: '',
-  }
-
-  onFormInputChange = field => e => { 
-    this.setState({
-      [field]: e.target.value
-    })
-  }
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { name,email,password } = this.state;
-    const data = {
-      name,
-      email,
-      password,
-    }
-    axios.post('auth/registration',data)
-      .then(res => {
-        console.log('res',res)
-        this.setState({
-          name: '',
-          email: '',
-          password: ''
-        })
-      })
-  }
-
-  render() {
-    return(
-      <div className={wrapperClasses.wrapper}>
-        <form onSubmit={this.onSubmit} className={formClasses.form}>
-          <label className={formClasses.label}>
-            <span>Name</span>
-            <Input
-              value={this.state.name} 
-              placeholder="Enter your name"
-              onChange={this.onFormInputChange('name')}
-              className={formClasses.input}
-            />
-          </label>
-          <label className={formClasses.label}>
-            <span>Email</span>
-            <Input
-              value={this.state.email} 
-              placeholder="Enter your email"
-              onChange={this.onFormInputChange('email')}
-              className={formClasses.input}
-            />
-          </label>
-          <label className={formClasses.label}>
-            <span>Password</span>
-            <Input
-              value={this.state.password} 
-              placeholder="Enter your password"
-              onChange={this.onFormInputChange('password')}
-              className={formClasses.input}
-              type="password"
-            />
-          </label>
-          <button type="submit" className={formClasses.submit}>Submit</button>
-        </form>
+const Registration = (props) => {
+  return props.isAuthenticated
+    ? <Redirect to={HOME_URL} />
+    : (
+      <div className={registrationClasses.wrapper}>
+        <h2 className={formClasses.authTitle}>registration</h2>
+        <SocialMediaAuth />
+        <Form />
+        <Link to={LOGIN_URL} className={formClasses.authLink}>login</Link>
+        <Link to={HOME_URL} className={formClasses.authBackLink}>
+          <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
+        </Link>
       </div>
-    )
-  }
-}
+    );
+};
+
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    isAuthenticated: !!state.auth.token,
+  };
+};
+
+Registration.defaultProps = {
+  isAuthenticated: false,
+};
+
+Registration.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+const Enhanced = connect(mapStateToProps)(Registration);
+
+export { Enhanced as Registration };
