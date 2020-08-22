@@ -7,17 +7,18 @@ import { Form } from './RegistrationForm';
 import { SocialMediaAuth } from '../../components/SocialMedia/SocialMediaBlock';
 import closeIcon from '../../assets/images/icons/close.svg';
 import registrationClasses from './registration.module.scss';
+import { LOGIN_URL, HOME_URL } from '../../constants/routes';
 
 const Registration = (props) => {
   return props.isAuthenticated
-    ? <Redirect to="/" />
+    ? <Redirect to={HOME_URL} />
     : (
       <div className={registrationClasses.wrapper}>
         <h2 className={formClasses.authTitle}>registration</h2>
         <SocialMediaAuth />
         <Form />
-        <Link to="/login" className={formClasses.authLink}>login</Link>
-        <Link to="/" className={formClasses.authBackLink}>
+        <Link to={LOGIN_URL} className={formClasses.authLink}>login</Link>
+        <Link to={HOME_URL} className={formClasses.authBackLink}>
           <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
         </Link>
       </div>
@@ -27,7 +28,7 @@ const Registration = (props) => {
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    isAuthenticated: state.auth.token !== null,
+    isAuthenticated: !!state.auth.token,
   };
 };
 

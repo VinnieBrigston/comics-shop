@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { login } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from './login.module.scss';
+import { validation } from './validationSchema';
 
 
 const Form = (props) => {
@@ -14,13 +14,7 @@ const Form = (props) => {
       email: '',
       password: '',
     },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('this field is required'),
-      password: Yup.string()
-        .required('Password could not be empty'),
-    }),
+    validationSchema: validation,
     onSubmit: values => {
       const { login } = props;
       login(values);
@@ -38,9 +32,9 @@ const Form = (props) => {
         className={`${formClasses.authInput} ${errors.email && formClasses.authInput_withError}`}
         {...formConfig.getFieldProps('email')}
       />
-      {touched.email && errors.email ? (
+      {touched.email && errors.email && (
         <div className={formClasses.errorMessage}>{formConfig.errors.email}</div>
-      ) : null}
+      )}
       <input
         id="password"
         name="password"
@@ -49,9 +43,9 @@ const Form = (props) => {
         className={`${formClasses.authInput} 'with-error'`}
         {...formConfig.getFieldProps('password')}
       />
-      {touched.password && errors.password ? (
+      {touched.password && errors.password && (
         <div className={formClasses.errorMessage}>{formConfig.errors.password}</div>
-      ) : null}
+      )}
       <button type="submit" className={formClasses.authSubmit}>yes</button>
     </form>
   );
