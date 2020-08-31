@@ -6,7 +6,14 @@ import { Main } from './containers/Main';
 import store from './store';
 import { Registration } from './containers/Registration';
 import { Login } from './containers/Login';
-import { LOGIN_URL, REGISTER_URL, HOME_URL } from './constants/routes';
+import {
+  LOGIN_URL,
+  REGISTER_URL,
+  HOME_URL,
+  PRIVATE_URL,
+} from './constants/routes';
+import { Testprivate } from './components/Test';
+import { Example } from './components/Test/ExamplePage';
 import 'normalize.css';
 
 ReactDOM.render(
@@ -17,6 +24,7 @@ ReactDOM.render(
           <Route path={REGISTER_URL} component={Registration} />
           <Route path={LOGIN_URL} component={Login} />
           <Route path={HOME_URL} exact component={Main} />
+          <Testprivate path={PRIVATE_URL} component={Example} />
         </Switch>
       </Router>
     </React.StrictMode>

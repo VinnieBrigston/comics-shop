@@ -1,60 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useFormik } from 'formik';
+import { Formik, Form } from 'formik';
 import { login } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from './login.module.scss';
 import { validation } from './validationSchema';
+import { Input } from '../../components/FormElements/Input';
 
-
-const Form = (props) => {
-  const formConfig = useFormik({
-    initialValues: {
+const LoginForm = (props) => (
+  <Formik
+    initialValues={{
       email: '',
       password: '',
-    },
-    validationSchema: validation,
-    onSubmit: values => {
+    }}
+    validationSchema={validation}
+    onSubmit={values => {
       const { login } = props;
-      login(values);
-    },
-  });
-
-  const { handleSubmit, touched, errors } = formConfig;
-  return (
-    <form onSubmit={handleSubmit} className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
-      <input
+      try {
+        login(values);
+      } catch (e) {
+        console.log('rsdsd', e.response);
+      }
+    }}
+  >
+    <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
+      <Input
         id="email"
         name="email"
         placeholder="mail"
         type="text"
-        className={`${formClasses.authInput} ${errors.email && formClasses.authInput_withError}`}
-        {...formConfig.getFieldProps('email')}
       />
-      {touched.email && errors.email && (
-        <div className={formClasses.errorMessage}>{formConfig.errors.email}</div>
-      )}
-      <input
+      <Input
         id="password"
         name="password"
         placeholder="password"
         type="password"
-        className={`${formClasses.authInput} 'with-error'`}
-        {...formConfig.getFieldProps('password')}
       />
-      {touched.password && errors.password && (
-        <div className={formClasses.errorMessage}>{formConfig.errors.password}</div>
-      )}
       <button type="submit" className={formClasses.authSubmit}>yes</button>
-    </form>
-  );
-};
+    </Form>
+  </Formik>
+);
 
-const Enhanced = connect(null, { login })(Form);
+const Enhanced = connect(null, { login })(LoginForm);
 
-export { Enhanced as Form };
+export { Enhanced as LoginForm };
 
-Form.propTypes = {
+LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
 };
