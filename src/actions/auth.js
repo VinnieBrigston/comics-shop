@@ -1,6 +1,11 @@
 import axios from '../vendor/axios';
 import { configurateInterceptors } from '../vendor/axios/private';
-import { AUTH_START, AUTH_SUCCESS, AUTH_LOGOUT } from './types';
+import {
+  AUTH_START,
+  AUTH_SUCCESS,
+  AUTH_LOGOUT,
+  AUTH_FAILED,
+} from './types';
 import { saveState, removeState } from '../helpers/localStorage';
 
 export const authStart = () => (
@@ -14,6 +19,13 @@ export const authSuccess = (token, userId) => {
     type: AUTH_SUCCESS,
     token,
     userId,
+  };
+};
+
+export const authFailed = (message) => {
+  return {
+    type: AUTH_FAILED,
+    message,
   };
 };
 
@@ -56,5 +68,9 @@ export const login = ({ email, password }) => (dispatch) => {
       }, 'shopAuthState');
       configurateInterceptors(token);
       dispatch(authSuccess(token, userId));
+    })
+    .catch(error => {
+      const errorMessage = error.response?.data?.message?.error;
+      dispatch(authFailed(errorMessage));
     });
 };

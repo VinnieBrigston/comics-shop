@@ -17,11 +17,7 @@ const LoginForm = (props) => (
     validationSchema={validation}
     onSubmit={values => {
       const { login } = props;
-      try {
-        login(values);
-      } catch (e) {
-        console.log('rsdsd', e.response);
-      }
+      login(values);
     }}
   >
     <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
@@ -36,16 +32,28 @@ const LoginForm = (props) => (
         name="password"
         placeholder="password"
         type="password"
+        autherror={props.authError}
       />
       <button type="submit" className={formClasses.authSubmit}>yes</button>
     </Form>
   </Formik>
 );
 
-const Enhanced = connect(null, { login })(LoginForm);
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError,
+  };
+};
 
-export { Enhanced as LoginForm };
+LoginForm.defaultProps = {
+  authError: null,
+};
 
 LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
+  authError: PropTypes.string,
 };
+
+const Enhanced = connect(mapStateToProps, { login })(LoginForm);
+
+export { Enhanced as LoginForm };

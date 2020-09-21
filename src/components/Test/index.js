@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import { LOGIN_URL } from '../../constants/routes';
 
 
-const Testprivate = ({ isAuthenticated, component, path }) => {
+const TestPrivate = ({ isAuthenticated, component: Component, path }) => {
   return (
     <Route render={(routeProps) => {
       if (isAuthenticated) {
-        const Component = component;
         return <Component {...routeProps} />;
       }
       return (
@@ -33,13 +32,13 @@ const mapStateToProps = state => {
   };
 };
 
-const Enhanced = connect(mapStateToProps)(Testprivate);
+const Enhanced = connect(mapStateToProps)(TestPrivate);
 
-Testprivate.defaultProps = {
+TestPrivate.defaultProps = {
   isAuthenticated: false,
 };
 
-Testprivate.propTypes = {
+TestPrivate.propTypes = {
   isAuthenticated: PropTypes.bool,
   component: PropTypes.element.isRequired,
   path: PropTypes.string.isRequired,

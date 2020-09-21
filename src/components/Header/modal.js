@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import classes from './header.module.scss';
 import { LogoutButton } from './LogoutButton';
 
+Modal.setAppElement('#root');
+
 const modalStyles = {
   content: {
     bottom: 'auto',
