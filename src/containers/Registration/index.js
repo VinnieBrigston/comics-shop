@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import formClasses from '../../common/styles/form.module.scss';
-import { Form } from './RegistrationForm';
+import { RegistrationForm } from './RegistrationForm';
 import { SocialMediaAuth } from '../../components/SocialMedia/SocialMediaBlock';
 import closeIcon from '../../assets/images/icons/close.svg';
 import registrationClasses from './registration.module.scss';
@@ -16,7 +16,7 @@ const Registration = (props) => {
       <div className={registrationClasses.wrapper}>
         <h2 className={formClasses.authTitle}>registration</h2>
         <SocialMediaAuth />
-        <Form />
+        <RegistrationForm />
         <Link to={LOGIN_URL} className={formClasses.authLink}>login</Link>
         <Link to={HOME_URL} className={formClasses.authBackLink}>
           <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Form } from './LoginForm';
+import { LoginForm } from './LoginForm';
 import { SocialMediaAuth } from '../../components/SocialMedia/SocialMediaBlock';
 import loginPageClasses from './login.module.scss';
 import formClasses from '../../common/styles/form.module.scss';
@@ -10,13 +10,14 @@ import closeIcon from '../../assets/images/icons/close.svg';
 import { REGISTER_URL, HOME_URL } from '../../constants/routes';
 
 const Login = (props) => {
+  const { location: { state: { return_path } = HOME_URL } } = props;
   return props.isAuthenticated
-    ? <Redirect to={HOME_URL} />
+    ? <Redirect to={return_path} />
     : (
       <div className={loginPageClasses.wrapper}>
         <h2 className={formClasses.authTitle}>login</h2>
         <SocialMediaAuth />
-        <Form />
+        <LoginForm />
         <Link to={REGISTER_URL} className={formClasses.authLink}>registration</Link>
         <Link to={HOME_URL} className={formClasses.authBackLink}>
           <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
