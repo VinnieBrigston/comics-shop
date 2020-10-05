@@ -6,11 +6,15 @@ import { Main } from './containers/Main';
 import store from './store';
 import { Registration } from './containers/Registration';
 import { Login } from './containers/Login';
+import { Resetting } from './containers/ResetPassword';
+import { PasswordRecovery } from './containers/PasswordRecovery';
 import {
   LOGIN_URL,
   REGISTER_URL,
   HOME_URL,
   PRIVATE_URL,
+  RESET_PASS_URL,
+  PASSWORD_RECOVERY_URL,
 } from './constants/routes';
 import { Testprivate } from './components/Test';
 import { Example } from './components/Test/ExamplePage';
@@ -22,6 +26,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path={REGISTER_URL} component={Registration} />
+          <Route path={RESET_PASS_URL} component={Resetting} />
+          <Route path={PASSWORD_RECOVERY_URL} component={PasswordRecovery} />
           <Route path={LOGIN_URL} component={Login} />
           <Route path={HOME_URL} exact component={Main} />
           <Testprivate path={PRIVATE_URL} component={Example} />

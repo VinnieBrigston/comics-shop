@@ -93,6 +93,10 @@
   text-transform: uppercase;
 }
 
+.ressetLink {
+  margin-top: 16px;
+}
+
 .socialsBlock {
   align-items: center;
   display: flex;
@@ -128,4 +132,21 @@
   line-height: 1;
   margin: 8px 0 0 0;
   width: 100%;
+}
+
+.recoveryMessage {
+  color: #fff;
+  font-family: $font-secondary;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hiddenElement {
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
