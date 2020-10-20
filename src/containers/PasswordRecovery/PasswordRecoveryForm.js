@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
@@ -8,44 +8,51 @@ import loginPageClasses from '../Login/login.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 
-const PasswordRecoveryForm = (props) => (
-  <Formik
-    initialValues={{
-      hash: props.hash,
-      password: '',
-      confirmPassword: '',
-    }}
-    enableReinitialize={true}
-    validationSchema={validation}
-    onSubmit={values => {
-      const { recoverPassword } = props;
-      recoverPassword(values);
-    }}
-  >
-    <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
-      <Input
-        id="password"
-        name="password"
-        placeholder="password"
-        type="password"
-      />
-      <Input
-        id="confirmPassword"
-        name="confirmPassword"
-        placeholder="Please repeat you password"
-        type="password"
-      />
-      <Input
-        id="hash"
-        name="hash"
-        placeholder="secret hash"
-        type="text"
-        elementishidden
-      />
-      <button type="submit" className={formClasses.authSubmit}>submit</button>
-    </Form>
-  </Formik>
-);
+const PasswordRecoveryForm = (props) => {
+
+  const { hash } = props;
+
+  const initialValues = useMemo(() => ({
+    hash,
+    password: '',
+    confirmPassword: '',
+  }), [hash]);
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      enableReinitialize={true}
+      validationSchema={validation}
+      onSubmit={values => {
+        const { recoverPassword } = props;
+        recoverPassword(values);
+      }}
+    >
+      <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
+        <Input
+          id="password"
+          name="password"
+          placeholder="password"
+          type="password"
+        />
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Please repeat you password"
+          type="password"
+        />
+        <Input
+          id="hash"
+          name="hash"
+          placeholder="secret hash"
+          type="text"
+          isHidden
+        />
+        <button type="submit" className={formClasses.authSubmit}>submit</button>
+      </Form>
+    </Formik>
+  );
+};
 
 const mapStateToProps = state => {
   return {
@@ -54,7 +61,7 @@ const mapStateToProps = state => {
 };
 
 PasswordRecoveryForm.defaultProps = {
-  authError: null,
+  authError: '',
   hash: null,
 };
 

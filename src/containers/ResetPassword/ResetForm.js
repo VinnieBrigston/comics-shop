@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
-import { reset } from '../../actions';
+import { resetPassword } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from '../Login/login.module.scss';
 import { validation } from './validationSchema';
@@ -15,8 +15,8 @@ const ResetForm = (props) => (
     }}
     validationSchema={validation}
     onSubmit={values => {
-      const { reset } = props;
-      reset(values);
+      const { resetPassword } = props;
+      resetPassword(values);
     }}
   >
     <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
@@ -25,7 +25,7 @@ const ResetForm = (props) => (
         name="email"
         placeholder="mail"
         type="text"
-        autherror={props.authError}
+        authError={props.authError}
       />
       <button type="submit" className={formClasses.authSubmit}>reset</button>
     </Form>
@@ -39,14 +39,14 @@ const mapStateToProps = state => {
 };
 
 ResetForm.defaultProps = {
-  authError: null,
+  authError: '',
 };
 
 ResetForm.propTypes = {
-  reset: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired,
   authError: PropTypes.string,
 };
 
-const Enhanced = connect(mapStateToProps, { reset })(ResetForm);
+const Enhanced = connect(mapStateToProps, { resetPassword })(ResetForm);
 
 export { Enhanced as ResetForm };

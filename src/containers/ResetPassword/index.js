@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,12 +7,12 @@ import loginPageClasses from '../Login/login.module.scss';
 import formClasses from '../../common/styles/form.module.scss';
 import closeIcon from '../../assets/images/icons/close.svg';
 import { HOME_URL } from '../../constants/routes';
-import { resetAuthNotifications } from '../../actions';
+import { resetErrorMessages } from '../../actions';
 
-class Resetting extends Component {
+class PasswordResetting extends PureComponent {
   componentWillUnmount() {
-    const { resetAuthNotifications } = this.props;
-    resetAuthNotifications();
+    const { resetErrorMessages } = this.props;
+    resetErrorMessages();
   }
 
   render() {
@@ -36,18 +36,18 @@ class Resetting extends Component {
   }
 }
 
-Resetting.propTypes = {
+PasswordResetting.propTypes = {
   resetLinkIsSent: PropTypes.bool.isRequired,
-  resetAuthNotifications: PropTypes.func.isRequired,
+  resetErrorMessages: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
-    loading: state.auth.loading,
+    isLoading: state.auth.isLoading,
     resetLinkIsSent: state.auth.recovery.resetLinkIsSent,
   };
 };
 
-const Enhanced = connect(mapStateToProps, { resetAuthNotifications })(Resetting);
+const Enhanced = connect(mapStateToProps, { resetErrorMessages })(PasswordResetting);
 
-export { Enhanced as Resetting };
+export { Enhanced as PasswordResetting };

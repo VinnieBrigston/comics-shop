@@ -9,7 +9,7 @@ import closeIcon from '../../assets/images/icons/close.svg';
 import registrationClasses from './registration.module.scss';
 import { LOGIN_URL, HOME_URL } from '../../constants/routes';
 
-const Registration = (props) => {
+const UserRegistration = (props) => {
   return props.isAuthenticated
     ? <Redirect to={HOME_URL} />
     : (
@@ -27,19 +27,19 @@ const Registration = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loading: state.auth.loading,
-    isAuthenticated: !!state.auth.token,
+    isLoading: state.auth.isLoading,
+    isAuthenticated: !!state.user.token,
   };
 };
 
-Registration.defaultProps = {
+UserRegistration.defaultProps = {
   isAuthenticated: false,
 };
 
-Registration.propTypes = {
+UserRegistration.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
-const Enhanced = connect(mapStateToProps)(Registration);
+const Enhanced = connect(mapStateToProps)(UserRegistration);
 
-export { Enhanced as Registration };
+export { Enhanced as UserRegistration };

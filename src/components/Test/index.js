@@ -28,7 +28,7 @@ const TestPrivate = ({ isAuthenticated, component: Component, path }) => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: !!state.auth.token,
+    isAuthenticated: !!state.user.token,
   };
 };
 

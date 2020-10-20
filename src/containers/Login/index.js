@@ -9,7 +9,7 @@ import formClasses from '../../common/styles/form.module.scss';
 import closeIcon from '../../assets/images/icons/close.svg';
 import { REGISTER_URL, HOME_URL, RESET_PASS_URL } from '../../constants/routes';
 
-const Login = (props) => {
+const UserLogin = (props) => {
   const { location: { state: { return_path } = HOME_URL } } = props;
   return props.isAuthenticated
     ? <Redirect to={return_path} />
@@ -29,19 +29,19 @@ const Login = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loading: state.auth.loading,
-    isAuthenticated: !!state.auth.token,
+    isLoading: state.auth.isLoading,
+    isAuthenticated: !!state.user.token,
   };
 };
 
-const Enhanced = connect(mapStateToProps)(Login);
+const Enhanced = connect(mapStateToProps)(UserLogin);
 
-export { Enhanced as Login };
+export { Enhanced as UserLogin };
 
-Login.defaultProps = {
+UserLogin.defaultProps = {
   isAuthenticated: false,
 };
 
-Login.propTypes = {
+UserLogin.propTypes = {
   isAuthenticated: PropTypes.bool,
 };

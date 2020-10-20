@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
-import { login } from '../../actions';
+import { logInUser } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from './login.module.scss';
 import { validation } from './validationSchema';
@@ -16,8 +16,8 @@ const LoginForm = (props) => (
     }}
     validationSchema={validation}
     onSubmit={values => {
-      const { login } = props;
-      login(values);
+      const { logInUser } = props;
+      logInUser(values);
     }}
   >
     <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
@@ -32,7 +32,7 @@ const LoginForm = (props) => (
         name="password"
         placeholder="password"
         type="password"
-        autherror={props.authError}
+        authError={props.authError}
       />
       <button type="submit" className={formClasses.authSubmit}>yes</button>
     </Form>
@@ -46,14 +46,14 @@ const mapStateToProps = state => {
 };
 
 LoginForm.defaultProps = {
-  authError: null,
+  authError: '',
 };
 
 LoginForm.propTypes = {
-  login: PropTypes.func.isRequired,
+  logInUser: PropTypes.func.isRequired,
   authError: PropTypes.string,
 };
 
-const Enhanced = connect(mapStateToProps, { login })(LoginForm);
+const Enhanced = connect(mapStateToProps, { logInUser })(LoginForm);
 
 export { Enhanced as LoginForm };

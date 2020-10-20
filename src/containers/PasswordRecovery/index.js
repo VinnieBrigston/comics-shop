@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { validateHash } from '../../actions';
+import { validateResetHash } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import { PasswordRecoveryForm } from './PasswordRecoveryForm';
 import closeIcon from '../../assets/images/icons/close.svg';
 import registrationClasses from '../Registration/registration.module.scss';
 import { HOME_URL } from '../../constants/routes';
 
-class PasswordRecovery extends Component {
+class PasswordRecovery extends PureComponent {
   state={
     hash: '',
   }
 
   componentDidMount() {
     const hash = this.props.match?.params?.hash;
-    const { validateHash } = this.props;
+    const { validateResetHash } = this.props;
     this.setState({
       hash,
     });
-    if (hash) validateHash(hash);
+    if (hash) validateResetHash(hash);
   }
 
   render() {
@@ -51,8 +51,8 @@ class PasswordRecovery extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.auth.loading,
-    isAuthenticated: !!state.auth.token,
+    isLoading: state.auth.isLoading,
+    isAuthenticated: !!state.user.token,
     authError: state.auth.authError,
     hashIsValid: state.auth.recovery.hashIsValid,
   };
@@ -60,14 +60,16 @@ const mapStateToProps = state => {
 
 PasswordRecovery.defaultProps = {
   isAuthenticated: false,
+  authError: '',
 };
 
 PasswordRecovery.propTypes = {
   isAuthenticated: PropTypes.bool,
-  validateHash: PropTypes.func.isRequired,
+  validateResetHash: PropTypes.func.isRequired,
   hashIsValid: PropTypes.bool.isRequired,
+  authError: PropTypes.string,
 };
 
-const Enhanced = connect(mapStateToProps, { validateHash })(PasswordRecovery);
+const Enhanced = connect(mapStateToProps, { validateResetHash })(PasswordRecovery);
 
 export { Enhanced as PasswordRecovery };
