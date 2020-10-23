@@ -8,11 +8,11 @@ import classes from './header.module.scss';
 
 class Header extends Component {
   state = {
-    profileModalIsOpen: false,
+    isProfileModalOpen: false,
   }
 
   toggleProfileModal = () => {
-    this.setState(({ profileModalIsOpen }) => ({ profileModalIsOpen: !profileModalIsOpen }));
+    this.setState(({ isProfileModalOpen }) => ({ isProfileModalOpen: !isProfileModalOpen }));
   }
 
 
@@ -24,7 +24,7 @@ class Header extends Component {
           : <Controls />
         }
         <ProfileModal
-          isOpen={this.state.profileModalIsOpen}
+          isOpen={this.state.isProfileModalOpen}
           toggleProfileModal={this.toggleProfileModal}
         />
       </div>

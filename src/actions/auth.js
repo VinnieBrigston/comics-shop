@@ -15,7 +15,7 @@ export const resetErrorMessages = createAction('RESET_ERROR_MESSAGES');
 
 export const logOutUser = createAction('LOG_OUT_USER');
 
-export const handleLogOutClick = () => (dispatch) => {
+export const logout = () => (dispatch) => {
   removeState('shopAuthState');
   dispatch(logOutUser());
 };

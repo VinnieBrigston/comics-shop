@@ -9,8 +9,7 @@ import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 
 const PasswordRecoveryForm = (props) => {
-
-  const { hash } = props;
+  const { hash, recoverPassword } = props;
 
   const initialValues = useMemo(() => ({
     hash,
@@ -18,15 +17,16 @@ const PasswordRecoveryForm = (props) => {
     confirmPassword: '',
   }), [hash]);
 
+  const handleSubmit = (values) => {
+    recoverPassword(values);
+  };
+
   return (
     <Formik
       initialValues={initialValues}
-      enableReinitialize={true}
+      enableReinitialize
       validationSchema={validation}
-      onSubmit={values => {
-        const { recoverPassword } = props;
-        recoverPassword(values);
-      }}
+      onSubmit={handleSubmit}
     >
       <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
         <Input
@@ -62,7 +62,7 @@ const mapStateToProps = state => {
 
 PasswordRecoveryForm.defaultProps = {
   authError: '',
-  hash: null,
+  hash: '',
 };
 
 PasswordRecoveryForm.propTypes = {

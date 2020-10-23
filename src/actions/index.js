@@ -6,7 +6,7 @@ export {
   sendRecoveryLink,
   handleResetHashValidity,
   logInUser,
-  handleLogOutClick,
+  logout,
   logOutUser,
   registerUser,
   resetPassword,
