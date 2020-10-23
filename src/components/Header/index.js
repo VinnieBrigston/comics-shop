@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Profile } from './Profile';
 import { Controls } from './Controls';
-import { ProfileModal } from './modal';
+import { ProfileModal } from './ProfileModal';
 import classes from './header.module.scss';
 
 class Header extends Component {
   state = {
-    showProfileModal: false,
+    isProfileModalOpen: false,
   }
 
   toggleProfileModal = () => {
-    this.setState(({ showProfileModal }) => ({ showProfileModal: !showProfileModal }));
+    this.setState(({ isProfileModalOpen }) => ({ isProfileModalOpen: !isProfileModalOpen }));
   }
 
 
@@ -24,7 +24,7 @@ class Header extends Component {
           : <Controls />
         }
         <ProfileModal
-          showModal={this.state.showProfileModal}
+          isOpen={this.state.isProfileModalOpen}
           toggleProfileModal={this.toggleProfileModal}
         />
       </div>
@@ -34,7 +34,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: !!state.auth.token,
+    isAuthenticated: !!state.user.token,
   };
 };
 

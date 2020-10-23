@@ -1,5 +1,16 @@
 export {
-  login,
+  startAuthLoading,
+  stopAuthLoading,
+  authorizeUser,
+  notifyRequestError,
+  sendRecoveryLink,
+  handleResetHashValidity,
+  logInUser,
   logout,
-  register,
+  logOutUser,
+  registerUser,
+  resetPassword,
+  validateResetHash,
+  recoverPassword,
+  resetErrorMessages,
 } from './auth';

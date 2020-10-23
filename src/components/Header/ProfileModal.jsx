@@ -18,12 +18,12 @@ const modalStyles = {
 };
 
 export const ProfileModal = (props) => {
-  const { showModal, toggleProfileModal } = props;
+  const { isOpen, toggleProfileModal } = props;
   return (
     <Modal
-      isOpen={showModal}
+      isOpen={isOpen}
       onRequestClose={toggleProfileModal}
-      shouldCloseOnOverlayClick={true}
+      shouldCloseOnOverlayClick
       style={modalStyles}
     >
       <LogoutButton className={classes.logout} clickHandler={props.toggleProfileModal} />
@@ -32,10 +32,10 @@ export const ProfileModal = (props) => {
 };
 
 ProfileModal.defaultProps = {
-  showModal: false,
+  isOpen: false,
 };
 
 ProfileModal.propTypes = {
   toggleProfileModal: PropTypes.func.isRequired,
-  showModal: PropTypes.bool,
+  isOpen: PropTypes.bool,
 };

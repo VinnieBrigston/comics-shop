@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
-import { register } from '../../actions';
+import { registerUser } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import registrationClasses from './registration.module.scss';
 import { validation } from './validationSchema';
@@ -18,8 +18,8 @@ const RegistrationForm = (props) => (
     }}
     validationSchema={validation}
     onSubmit={values => {
-      const { register } = props;
-      register(values);
+      const { registerUser } = props;
+      registerUser(values);
     }}
   >
     <Form className={`${formClasses.form} ${registrationClasses.registrationForm}`}>
@@ -53,9 +53,9 @@ const RegistrationForm = (props) => (
 );
 
 RegistrationForm.propTypes = {
-  register: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
 };
 
-const Enhanced = connect(null, { register })(RegistrationForm);
+const Enhanced = connect(null, { registerUser })(RegistrationForm);
 
 export { Enhanced as RegistrationForm };
