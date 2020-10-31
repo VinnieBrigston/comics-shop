@@ -7,6 +7,7 @@ import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from '../Login/login.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
+import { getAuthErrorText } from '../../reducers/selectors/selectors_auth';
 
 const PasswordRecoveryForm = (props) => {
   const { hash, recoverPassword } = props;
@@ -56,7 +57,7 @@ const PasswordRecoveryForm = (props) => {
 
 const mapStateToProps = state => {
   return {
-    authError: state.auth.authError,
+    authError: getAuthErrorText(state),
   };
 };
 

@@ -8,6 +8,8 @@ import { SocialMediaAuth } from '../../components/SocialMedia/SocialMediaBlock';
 import closeIcon from '../../assets/images/icons/close.svg';
 import registrationClasses from './registration.module.scss';
 import { LOGIN_URL, HOME_URL } from '../../constants/routes';
+import { getLoadingStatus } from '../../reducers/selectors/selectors_auth';
+import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 
 const UserRegistration = (props) => {
   return props.isAuthenticated
@@ -27,8 +29,8 @@ const UserRegistration = (props) => {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.auth.isLoading,
-    isAuthenticated: !!state.user.token,
+    isLoading: getLoadingStatus(state),
+    isAuthenticated: getAuthenticatedStatus(state),
   };
 };
 

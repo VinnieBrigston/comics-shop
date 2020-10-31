@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LOGIN_URL } from '../../constants/routes';
+import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 
 
 const TestPrivate = ({ isAuthenticated, component: Component, path }) => {
@@ -28,7 +29,7 @@ const TestPrivate = ({ isAuthenticated, component: Component, path }) => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: !!state.user.token,
+    isAuthenticated: getAuthenticatedStatus(state),
   };
 };
 
