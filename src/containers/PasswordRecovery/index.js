@@ -8,6 +8,12 @@ import { PasswordRecoveryForm } from './PasswordRecoveryForm';
 import closeIcon from '../../assets/images/icons/close.svg';
 import registrationClasses from '../Registration/registration.module.scss';
 import { HOME_URL } from '../../constants/routes';
+import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
+import {
+  getLoadingStatus,
+  getAuthErrorText,
+  getHashValidationStatus,
+} from '../../reducers/selectors/selectors_auth';
 
 class PasswordRecovery extends PureComponent {
   state={
@@ -51,10 +57,10 @@ class PasswordRecovery extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.auth.isLoading,
-    isAuthenticated: !!state.user.token,
-    authError: state.auth.authError,
-    hashIsValid: state.auth.recovery.hashIsValid,
+    isLoading: getLoadingStatus(state),
+    isAuthenticated: getAuthenticatedStatus(state),
+    authError: getAuthErrorText(state),
+    hashIsValid: getHashValidationStatus(state),
   };
 };
 

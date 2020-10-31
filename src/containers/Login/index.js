@@ -8,6 +8,8 @@ import loginPageClasses from './login.module.scss';
 import formClasses from '../../common/styles/form.module.scss';
 import closeIcon from '../../assets/images/icons/close.svg';
 import { REGISTER_URL, HOME_URL, RESET_PASS_URL } from '../../constants/routes';
+import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
+import { getLoadingStatus } from '../../reducers/selectors/selectors_auth';
 
 const UserLogin = (props) => {
   const { location: { state: { return_path } = HOME_URL } } = props;
@@ -29,8 +31,8 @@ const UserLogin = (props) => {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.auth.isLoading,
-    isAuthenticated: !!state.user.token,
+    isLoading: getLoadingStatus(state),
+    isAuthenticated: getAuthenticatedStatus(state),
   };
 };
 

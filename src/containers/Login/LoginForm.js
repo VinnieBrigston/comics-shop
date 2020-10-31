@@ -7,6 +7,7 @@ import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from './login.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
+import { getAuthErrorText } from '../../reducers/selectors/selectors_auth';
 
 const LoginForm = (props) => (
   <Formik
@@ -41,7 +42,7 @@ const LoginForm = (props) => (
 
 const mapStateToProps = state => {
   return {
-    authError: state.auth.authError,
+    authError: getAuthErrorText(state),
   };
 };
 

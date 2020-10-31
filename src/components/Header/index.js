@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Profile } from './Profile';
 import { Controls } from './Controls';
 import { ProfileModal } from './ProfileModal';
+import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 import classes from './header.module.scss';
 
 class Header extends Component {
@@ -34,7 +35,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: !!state.user.token,
+    isAuthenticated: getAuthenticatedStatus(state),
   };
 };
 

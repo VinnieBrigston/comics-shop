@@ -8,6 +8,7 @@ import formClasses from '../../common/styles/form.module.scss';
 import closeIcon from '../../assets/images/icons/close.svg';
 import { HOME_URL } from '../../constants/routes';
 import { resetErrorMessages } from '../../actions';
+import { getLoadingStatus, checkSendingLink } from '../../reducers/selectors/selectors_auth';
 
 class PasswordResetting extends PureComponent {
   componentWillUnmount() {
@@ -43,8 +44,8 @@ PasswordResetting.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.auth.isLoading,
-    resetLinkIsSent: state.auth.recovery.resetLinkIsSent,
+    isLoading: getLoadingStatus(state),
+    resetLinkIsSent: checkSendingLink(state),
   };
 };
 
