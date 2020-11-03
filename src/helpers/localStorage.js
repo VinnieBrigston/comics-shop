@@ -1,6 +1,8 @@
+import { localStore } from '../utilities/storage';
+
 export const loadState = (key) => {
   try {
-    const serializedState = localStorage.getItem(key);
+    const serializedState = localStore.getItem(key);
     if (serializedState === null) {
       return undefined;
     }
@@ -13,7 +15,7 @@ export const loadState = (key) => {
 export const saveState = (state, key) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem(key, serializedState);
+    localStore.setItem(key, serializedState);
   } catch (err) {
     console.log(err);
   }
@@ -21,7 +23,7 @@ export const saveState = (state, key) => {
 
 export const removeState = (key) => {
   try {
-    localStorage.removeItem(key);
+    localStore.removeItem(key);
   } catch (error) {
     console.log(error);
   }

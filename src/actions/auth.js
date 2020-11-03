@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import axios from '../vendor/axios';
-import { configurateInterceptors } from '../vendor/axios/private';
+import { setAuthorizationToken } from '../vendor/axios/private';
 import { saveState, removeState } from '../helpers/localStorage';
 
 export const startAuthLoading = createAction('START_AUTH');
@@ -36,7 +36,7 @@ export const registerUser = ({ name, email, password }) => (dispatch) => {
           userId,
         },
       }, 'shopAuthState');
-      configurateInterceptors(token);
+      setAuthorizationToken(token);
       dispatch(authorizeUser({ token, userId }));
     })
     .catch(error => {
@@ -60,7 +60,7 @@ export const logInUser = ({ email, password }) => (dispatch) => {
           userId,
         },
       }, 'shopAuthState');
-      configurateInterceptors(token);
+      setAuthorizationToken(token);
       dispatch(authorizeUser({ token, userId }));
     })
     .catch(error => {
@@ -111,7 +111,7 @@ export const recoverPassword = ({ hash, password }) => (dispatch) => {
           userId,
         },
       }, 'shopAuthState');
-      configurateInterceptors(token);
+      setAuthorizationToken(token);
       dispatch(authorizeUser({ token, userId }));
     })
     .catch(error => {
