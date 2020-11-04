@@ -24,20 +24,24 @@ export const sendRecoveryLink = createAction('SEND_RECOVERY_LINK');
 
 export const handleResetHashValidity = createAction('VALIDATE_RESET_HASH');
 
+const updateUser = (res, dispatch) => {
+  const token = res.headers.authorization;
+  const userId = res.data._id;
+  saveState({
+    auth: {
+      token,
+      userId,
+    },
+  }, 'shopAuthState');
+  setAuthorizationToken(token);
+  dispatch(authorizeUser({ token, userId }));
+};
+
 export const registerUser = ({ name, email, password }) => (dispatch) => {
   dispatch(startAuthLoading());
   axios.post('auth/registration', { name, email, password })
     .then(res => {
-      const token = res.headers.authorization;
-      const userId = res.data._id;
-      saveState({
-        auth: {
-          token,
-          userId,
-        },
-      }, 'shopAuthState');
-      setAuthorizationToken(token);
-      dispatch(authorizeUser({ token, userId }));
+      updateUser(res, dispatch);
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
@@ -52,16 +56,7 @@ export const logInUser = ({ email, password }) => (dispatch) => {
   const data = { email, password };
   axios.post('auth/login', data)
     .then(res => {
-      const token = res.headers.authorization;
-      const userId = res.data._id;
-      saveState({
-        auth: {
-          token,
-          userId,
-        },
-      }, 'shopAuthState');
-      setAuthorizationToken(token);
-      dispatch(authorizeUser({ token, userId }));
+      updateUser(res, dispatch);
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
@@ -103,16 +98,7 @@ export const recoverPassword = ({ hash, password }) => (dispatch) => {
   const data = { hash, password };
   axios.post('auth/recover-password', data)
     .then((res) => {
-      const token = res.headers.authorization;
-      const userId = res.data._id;
-      saveState({
-        auth: {
-          token,
-          userId,
-        },
-      }, 'shopAuthState');
-      setAuthorizationToken(token);
-      dispatch(authorizeUser({ token, userId }));
+      updateUser(res, dispatch);
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.message;

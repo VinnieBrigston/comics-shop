@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { rootReducer } from '../reducers';
 import { loadState } from '../helpers/localStorage';
 import { configurateInterceptors, setAuthorizationToken } from '../vendor/axios/private';
+import { getUserToken } from '../reducers/selectors/selectors_user';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -14,7 +15,7 @@ if (preloadedData) {
   store = createStore(rootReducer, preloadedData, composeEnhancers(
     applyMiddleware(thunk),
   ));
-  setAuthorizationToken(store.getState().auth.token);
+  setAuthorizationToken(getUserToken(store.getState()));
   configurateInterceptors(store.dispatch);
 } else {
   store = createStore(rootReducer, composeEnhancers(
