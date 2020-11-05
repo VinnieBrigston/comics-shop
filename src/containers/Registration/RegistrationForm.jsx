@@ -8,49 +8,51 @@ import registrationClasses from './registration.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 
-const RegistrationForm = (props) => (
-  <Formik
-    initialValues={{
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    }}
-    validationSchema={validation}
-    onSubmit={values => {
-      const { registerUser } = props;
-      registerUser(values);
-    }}
-  >
-    <Form className={`${formClasses.form} ${registrationClasses.registrationForm}`}>
-      <Input
-        id="name"
-        name="name"
-        placeholder="name"
-        type="text"
-      />
-      <Input
-        id="email"
-        name="email"
-        placeholder="email"
-        type="text"
-      />
-      <Input
-        id="password"
-        name="password"
-        placeholder="password"
-        type="password"
-      />
-      <Input
-        id="confirmPassword"
-        name="confirmPassword"
-        placeholder="Please repeat you password"
-        type="password"
-      />
-      <button type="submit" className={formClasses.authSubmit}>go</button>
-    </Form>
-  </Formik>
-);
+function RegistrationForm(props) {
+  return (
+    <Formik
+      initialValues={{
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      }}
+      validationSchema={validation}
+      onSubmit={values => {
+        const { registerUser } = props;
+        registerUser(values);
+      }}
+    >
+      <Form className={`${formClasses.form} ${registrationClasses.registrationForm}`}>
+        <Input
+          id="name"
+          name="name"
+          placeholder="name"
+          type="text"
+        />
+        <Input
+          id="email"
+          name="email"
+          placeholder="email"
+          type="text"
+        />
+        <Input
+          id="password"
+          name="password"
+          placeholder="password"
+          type="password"
+        />
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Please repeat you password"
+          type="password"
+        />
+        <button type="submit" className={formClasses.authSubmit}>go</button>
+      </Form>
+    </Formik>
+  );
+}
 
 RegistrationForm.propTypes = {
   registerUser: PropTypes.func.isRequired,

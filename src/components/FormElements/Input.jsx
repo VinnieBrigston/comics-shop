@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useField } from 'formik';
 import formClasses from '../../common/styles/form.module.scss';
 
-export const Input = ({ ...props }) => {
+export function Input({ ...props }) {
   const [field, { error, touched }] = useField(props);
   const {
     authError,
@@ -35,7 +35,7 @@ export const Input = ({ ...props }) => {
       )}
     </div>
   );
-};
+}
 
 Input.defaultProps = {
   authError: '',

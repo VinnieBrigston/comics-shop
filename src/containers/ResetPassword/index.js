@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,31 +10,33 @@ import { HOME_URL } from '../../constants/routes';
 import { resetErrorMessages } from '../../actions';
 import { getLoadingStatus, checkSendingLink } from '../../reducers/selectors/selectors_auth';
 
-class PasswordResetting extends PureComponent {
-  componentWillUnmount() {
-    const { resetErrorMessages } = this.props;
-    resetErrorMessages();
-  }
+function PasswordResetting(props) {
 
-  render() {
-    const { resetLinkIsSent } = this.props;
-    return (
-      <div className={loginPageClasses.wrapper}>
-        <h2 className={formClasses.authTitle}>reset yout password</h2>
-        {resetLinkIsSent
-          ? (
-            <h3 className={formClasses.recoveryMessage}>
-              Recovery link was sent on your email. Please check
-            </h3>
-          )
-          : <ResetForm />
-        }
-        <Link to={HOME_URL} className={formClasses.authBackLink}>
-          <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
-        </Link>
-      </div>
-    );
-  }
+  const { resetLinkIsSent, resetErrorMessages } = props;
+
+  useEffect(() => {
+    return function reserErrorNotifications() {
+      console.log('reset');
+      resetErrorMessages();
+    };
+  }, [resetLinkIsSent]);
+
+  return (
+    <div className={loginPageClasses.wrapper}>
+      <h2 className={formClasses.authTitle}>reset yout password</h2>
+      {resetLinkIsSent
+        ? (
+          <h3 className={formClasses.recoveryMessage}>
+            Recovery link was sent on your email. Please check
+          </h3>
+        )
+        : <ResetForm />
+      }
+      <Link to={HOME_URL} className={formClasses.authBackLink}>
+        <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
+      </Link>
+    </div>
+  );
 }
 
 PasswordResetting.propTypes = {

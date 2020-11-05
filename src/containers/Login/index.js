@@ -11,7 +11,7 @@ import { REGISTER_URL, HOME_URL, RESET_PASS_URL } from '../../constants/routes';
 import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 import { getLoadingStatus } from '../../reducers/selectors/selectors_auth';
 
-const UserLogin = (props) => {
+function UserLogin(props) {
   const { location: { state: { return_path } = HOME_URL } } = props;
   return props.isAuthenticated
     ? <Redirect to={return_path} />
@@ -27,7 +27,7 @@ const UserLogin = (props) => {
         </Link>
       </div>
     );
-};
+}
 
 const mapStateToProps = state => {
   return {

@@ -9,7 +9,7 @@ import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 import { getAuthErrorText } from '../../reducers/selectors/selectors_auth';
 
-const PasswordRecoveryForm = (props) => {
+function PasswordRecoveryForm(props) {
   const { hash, recoverPassword } = props;
 
   const initialValues = useMemo(() => ({
@@ -53,7 +53,7 @@ const PasswordRecoveryForm = (props) => {
       </Form>
     </Formik>
   );
-};
+}
 
 const mapStateToProps = state => {
   return {

@@ -9,36 +9,38 @@ import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 import { getAuthErrorText } from '../../reducers/selectors/selectors_auth';
 
-const LoginForm = (props) => (
-  <Formik
-    initialValues={{
-      email: '',
-      password: '',
-    }}
-    validationSchema={validation}
-    onSubmit={values => {
-      const { logInUser } = props;
-      logInUser(values);
-    }}
-  >
-    <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
-      <Input
-        id="email"
-        name="email"
-        placeholder="mail"
-        type="text"
-      />
-      <Input
-        id="password"
-        name="password"
-        placeholder="password"
-        type="password"
-        authError={props.authError}
-      />
-      <button type="submit" className={formClasses.authSubmit}>yes</button>
-    </Form>
-  </Formik>
-);
+function LoginForm(props) {
+  return (
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      validationSchema={validation}
+      onSubmit={values => {
+        const { logInUser } = props;
+        logInUser(values);
+      }}
+    >
+      <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
+        <Input
+          id="email"
+          name="email"
+          placeholder="mail"
+          type="text"
+        />
+        <Input
+          id="password"
+          name="password"
+          placeholder="password"
+          type="password"
+          authError={props.authError}
+        />
+        <button type="submit" className={formClasses.authSubmit}>yes</button>
+      </Form>
+    </Formik>
+  );
+}
 
 const mapStateToProps = state => {
   return {

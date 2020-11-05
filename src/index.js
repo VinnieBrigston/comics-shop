@@ -16,7 +16,7 @@ import {
   RESET_PASS_URL,
   PASSWORD_RECOVERY_URL,
 } from './constants/routes';
-import { Testprivate } from './components/Test';
+import { PrivateRoute } from './components/Test';
 import { Example } from './components/Test/ExamplePage';
 import 'normalize.css';
 
@@ -30,7 +30,7 @@ ReactDOM.render(
           <Route path={PASSWORD_RECOVERY_URL} component={PasswordRecovery} />
           <Route path={LOGIN_URL} component={UserLogin} />
           <Route path={HOME_URL} exact component={Main} />
-          <Testprivate path={PRIVATE_URL} component={Example} />
+          <PrivateRoute path={PRIVATE_URL} component={Example} />
         </Switch>
       </Router>
     </React.StrictMode>

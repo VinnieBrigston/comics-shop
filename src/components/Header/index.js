@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Profile } from './Profile';
@@ -7,30 +7,23 @@ import { ProfileModal } from './ProfileModal';
 import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 import classes from './header.module.scss';
 
-class Header extends Component {
-  state = {
-    isProfileModalOpen: false,
-  }
-
-  toggleProfileModal = () => {
-    this.setState(({ isProfileModalOpen }) => ({ isProfileModalOpen: !isProfileModalOpen }));
-  }
-
-
-  render() {
-    return (
-      <div className={classes.header}>
-        { this.props.isAuthenticated
-          ? <Profile openModal={this.toggleProfileModal} />
-          : <Controls />
-        }
-        <ProfileModal
-          isOpen={this.state.isProfileModalOpen}
-          toggleProfileModal={this.toggleProfileModal}
-        />
-      </div>
-    );
-  }
+function Header(props) {
+  const [isProfileModalOpen, toggleProfileModalStatus] = useState(false);
+  const toggleProfileModal = () => {
+    toggleProfileModalStatus(!isProfileModalOpen);
+  };
+  return (
+    <div className={classes.header}>
+      { props.isAuthenticated
+        ? <Profile openModal={toggleProfileModal} />
+        : <Controls />
+      }
+      <ProfileModal
+        isOpen={isProfileModalOpen}
+        toggleProfileModal={toggleProfileModal}
+      />
+    </div>
+  );
 }
 
 const mapStateToProps = state => {

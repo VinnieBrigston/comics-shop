@@ -11,7 +11,7 @@ import { LOGIN_URL, HOME_URL } from '../../constants/routes';
 import { getLoadingStatus } from '../../reducers/selectors/selectors_auth';
 import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 
-const UserRegistration = (props) => {
+function UserRegistration(props) {
   return props.isAuthenticated
     ? <Redirect to={HOME_URL} />
     : (
@@ -25,7 +25,7 @@ const UserRegistration = (props) => {
         </Link>
       </div>
     );
-};
+}
 
 const mapStateToProps = state => {
   return {
