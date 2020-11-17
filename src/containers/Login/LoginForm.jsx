@@ -1,7 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { memo } from 'react';
 import { Formik, Form } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
 import { logInUser } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from './login.module.scss';
@@ -9,17 +8,20 @@ import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 import { getAuthErrorText } from '../../reducers/selectors/selectors_auth';
 
-function LoginForm(props) {
+const initialValues = {
+  email: '',
+  password: '',
+};
+
+export const LoginForm = memo(() => {
+  const dispatch = useDispatch();
+  const authError = useSelector(getAuthErrorText);
   return (
     <Formik
-      initialValues={{
-        email: '',
-        password: '',
-      }}
+      initialValues={initialValues}
       validationSchema={validation}
       onSubmit={values => {
-        const { logInUser } = props;
-        logInUser(values);
+        dispatch(logInUser(values));
       }}
     >
       <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
@@ -34,29 +36,10 @@ function LoginForm(props) {
           name="password"
           placeholder="password"
           type="password"
-          authError={props.authError}
+          authError={authError}
         />
         <button type="submit" className={formClasses.authSubmit}>yes</button>
       </Form>
     </Formik>
   );
-}
-
-const mapStateToProps = state => {
-  return {
-    authError: getAuthErrorText(state),
-  };
-};
-
-LoginForm.defaultProps = {
-  authError: '',
-};
-
-LoginForm.propTypes = {
-  logInUser: PropTypes.func.isRequired,
-  authError: PropTypes.string,
-};
-
-const Enhanced = connect(mapStateToProps, { logInUser })(LoginForm);
-
-export { Enhanced as LoginForm };
+});

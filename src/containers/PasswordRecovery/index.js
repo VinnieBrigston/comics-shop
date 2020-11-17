@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { validateResetHash } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
-import { PasswordRecoveryForm } from './PasswordRecoveryForm';
+import { PasswordRecoveryForm } from './PasswordRecoveryForm.jsx';
 import closeIcon from '../../assets/images/icons/close.svg';
 import registrationClasses from '../Registration/registration.module.scss';
 import { HOME_URL } from '../../constants/routes';
 import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 import {
-  getLoadingStatus,
   getAuthErrorText,
   getHashValidationStatus,
 } from '../../reducers/selectors/selectors_auth';
 
-function PasswordRecovery(props) {
+export function PasswordRecovery(props) {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(getAuthenticatedStatus);
+  const authError = useSelector(getAuthErrorText);
+  const hashIsValid = useSelector(getHashValidationStatus);
   const [hash, setHash] = useState('');
-  const {
-    isAuthenticated,
-    hashIsValid,
-    authError,
-    validateResetHash,
-  } = props;
 
   useEffect(() => {
     const hashFromUrl = props.match?.params?.hash;
     setHash(hashFromUrl);
-    if (hashFromUrl) validateResetHash(hash);
+    if (hashFromUrl) dispatch(validateResetHash(hash));
   }, []);
 
   return isAuthenticated
@@ -51,28 +47,3 @@ function PasswordRecovery(props) {
         </div>
       );
 }
-
-const mapStateToProps = state => {
-  return {
-    isLoading: getLoadingStatus(state),
-    isAuthenticated: getAuthenticatedStatus(state),
-    authError: getAuthErrorText(state),
-    hashIsValid: getHashValidationStatus(state),
-  };
-};
-
-PasswordRecovery.defaultProps = {
-  isAuthenticated: false,
-  authError: '',
-};
-
-PasswordRecovery.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  validateResetHash: PropTypes.func.isRequired,
-  hashIsValid: PropTypes.bool.isRequired,
-  authError: PropTypes.string,
-};
-
-const Enhanced = connect(mapStateToProps, { validateResetHash })(PasswordRecovery);
-
-export { Enhanced as PasswordRecovery };

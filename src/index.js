@@ -22,7 +22,7 @@ import 'normalize.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <Router>
         <Switch>
           <Route path={REGISTER_URL} component={UserRegistration} />
@@ -33,7 +33,7 @@ ReactDOM.render(
           <PrivateRoute path={PRIVATE_URL} component={Example} />
         </Switch>
       </Router>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </Provider>,
   document.getElementById('root'),
 );

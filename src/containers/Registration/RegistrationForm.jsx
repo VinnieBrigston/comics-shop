@@ -1,6 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { memo } from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { registerUser } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
@@ -8,19 +7,21 @@ import registrationClasses from './registration.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 
-function RegistrationForm(props) {
+const initialValues = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
+
+export const RegistrationForm = memo(() => {
+  const dispatch = useDispatch();
   return (
     <Formik
-      initialValues={{
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-      }}
+      initialValues={initialValues}
       validationSchema={validation}
       onSubmit={values => {
-        const { registerUser } = props;
-        registerUser(values);
+        dispatch(registerUser(values));
       }}
     >
       <Form className={`${formClasses.form} ${registrationClasses.registrationForm}`}>
@@ -52,12 +53,4 @@ function RegistrationForm(props) {
       </Form>
     </Formik>
   );
-}
-
-RegistrationForm.propTypes = {
-  registerUser: PropTypes.func.isRequired,
-};
-
-const Enhanced = connect(null, { registerUser })(RegistrationForm);
-
-export { Enhanced as RegistrationForm };
+});

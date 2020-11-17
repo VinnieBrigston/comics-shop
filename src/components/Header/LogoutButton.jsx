@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import classes from './header.module.scss';
 import { logout } from '../../actions';
 
-function LogoutButton(props) {
-  const { clickHandler, logout } = props;
+export function LogoutButton(props) {
+  const { clickHandler } = props;
+  const dispatch = useDispatch();
   function handleClick() {
     clickHandler();
-    logout();
+    dispatch(logout());
   }
   return (
     <button className={classes.logout} onClick={handleClick}>Logout</button>
@@ -17,9 +18,4 @@ function LogoutButton(props) {
 
 LogoutButton.propTypes = {
   clickHandler: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
 };
-
-const Enhanced = connect(null, { logout })(LogoutButton);
-
-export { Enhanced as LogoutButton };

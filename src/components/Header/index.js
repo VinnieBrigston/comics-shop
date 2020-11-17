@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Profile } from './Profile';
 import { Controls } from './Controls';
 import { ProfileModal } from './ProfileModal';
 import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 import classes from './header.module.scss';
 
-function Header(props) {
-  const [isProfileModalOpen, toggleProfileModalStatus] = useState(false);
-  const toggleProfileModal = () => {
-    toggleProfileModalStatus(!isProfileModalOpen);
-  };
+export function Header() {
+  const isAuthenticated = useSelector(getAuthenticatedStatus);
+  const [isProfileModalOpen, setModalStatus] = useState(false);
+  const toggleProfileModal = useCallback(() => {
+    setModalStatus(!isProfileModalOpen);
+  }, [isProfileModalOpen]);
   return (
     <div className={classes.header}>
-      { props.isAuthenticated
+      { isAuthenticated
         ? <Profile openModal={toggleProfileModal} />
         : <Controls />
       }
@@ -25,21 +25,3 @@ function Header(props) {
     </div>
   );
 }
-
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: getAuthenticatedStatus(state),
-  };
-};
-
-const Enhanced = connect(mapStateToProps)(Header);
-
-export { Enhanced as Header };
-
-Header.defaultProps = {
-  isAuthenticated: false,
-};
-
-Header.propTypes = {
-  isAuthenticated: PropTypes.bool,
-};

@@ -1,25 +1,23 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { ResetForm } from './ResetForm';
+import { useSelector, useDispatch } from 'react-redux';
+import { ResetForm } from './ResetForm.jsx';
 import loginPageClasses from '../Login/login.module.scss';
 import formClasses from '../../common/styles/form.module.scss';
 import closeIcon from '../../assets/images/icons/close.svg';
 import { HOME_URL } from '../../constants/routes';
 import { resetErrorMessages } from '../../actions';
-import { getLoadingStatus, checkSendingLink } from '../../reducers/selectors/selectors_auth';
+import { checkSendingLink } from '../../reducers/selectors/selectors_auth';
 
-function PasswordResetting(props) {
-
-  const { resetLinkIsSent, resetErrorMessages } = props;
+export function PasswordResetting() {
+  const dispatch = useDispatch();
+  const resetLinkIsSent = useSelector(checkSendingLink);
 
   useEffect(() => {
-    return function reserErrorNotifications() {
-      console.log('reset');
-      resetErrorMessages();
+    return () => {
+      dispatch(resetErrorMessages());
     };
-  }, [resetLinkIsSent]);
+  }, []);
 
   return (
     <div className={loginPageClasses.wrapper}>
@@ -38,19 +36,3 @@ function PasswordResetting(props) {
     </div>
   );
 }
-
-PasswordResetting.propTypes = {
-  resetLinkIsSent: PropTypes.bool.isRequired,
-  resetErrorMessages: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = state => {
-  return {
-    isLoading: getLoadingStatus(state),
-    resetLinkIsSent: checkSendingLink(state),
-  };
-};
-
-const Enhanced = connect(mapStateToProps, { resetErrorMessages })(PasswordResetting);
-
-export { Enhanced as PasswordResetting };
