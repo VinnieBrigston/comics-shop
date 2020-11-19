@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { Formik, Form } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetPassword } from '../../actions';
@@ -8,14 +8,12 @@ import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 import { getAuthErrorText } from '../../reducers/selectors/selectors_auth';
 
-const initialValues = {
-  email: '',
-};
-
 export const ResetForm = memo(() => {
   const dispatch = useDispatch();
   const authError = useSelector(getAuthErrorText);
-
+  const initialValues = useMemo(() => ({
+    email: '',
+  }), []);
   return (
     <Formik
       initialValues={initialValues}

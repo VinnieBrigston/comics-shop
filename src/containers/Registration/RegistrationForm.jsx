@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { registerUser } from '../../actions';
@@ -7,14 +7,13 @@ import registrationClasses from './registration.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 
-const initialValues = {
-  name: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-};
-
 export const RegistrationForm = memo(() => {
+  const initialValues = useMemo(() => ({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  }));
   const dispatch = useDispatch();
   return (
     <Formik

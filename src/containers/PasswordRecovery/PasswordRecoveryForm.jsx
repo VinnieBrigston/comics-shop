@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
@@ -8,15 +8,13 @@ import loginPageClasses from '../Login/login.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
 
-const initialValues = {
-  password: '',
-  confirmPassword: '',
-};
-
 export const PasswordRecoveryForm = memo((props) => {
   const dispatch = useDispatch();
   const { hash } = props;
-
+  const initialValues = useMemo(() => ({
+    password: '',
+    confirmPassword: '',
+  }), [hash]);
   const handleSubmit = (values) => {
     dispatch(recoverPassword(values));
   };
