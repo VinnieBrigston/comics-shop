@@ -28,7 +28,7 @@ const updateUser = (res, dispatch) => {
   const token = res.headers.authorization;
   const userId = res.data._id;
   saveState({
-    auth: {
+    user: {
       token,
       userId,
     },
@@ -45,7 +45,6 @@ export const registerUser = ({ name, email, password }) => (dispatch) => {
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
-      console.log('errorMessage in reg:', errorMessage);
       dispatch(notifyRequestError({ message: errorMessage }));
     })
     .finally(() => dispatch(stopAuthLoading));
@@ -60,7 +59,6 @@ export const logInUser = ({ email, password }) => (dispatch) => {
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
-      console.log('errorMessage in log:', errorMessage);
       dispatch(notifyRequestError({ message: errorMessage }));
     })
     .finally(() => dispatch(stopAuthLoading));

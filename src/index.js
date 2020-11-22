@@ -16,24 +16,22 @@ import {
   RESET_PASS_URL,
   PASSWORD_RECOVERY_URL,
 } from './constants/routes';
-import { Testprivate } from './components/Test';
+import { PrivateRoute } from './components/Test';
 import { Example } from './components/Test/ExamplePage';
 import 'normalize.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <Router>
-        <Switch>
-          <Route path={REGISTER_URL} component={UserRegistration} />
-          <Route path={RESET_PASS_URL} component={PasswordResetting} />
-          <Route path={PASSWORD_RECOVERY_URL} component={PasswordRecovery} />
-          <Route path={LOGIN_URL} component={UserLogin} />
-          <Route path={HOME_URL} exact component={Main} />
-          <Testprivate path={PRIVATE_URL} component={Example} />
-        </Switch>
-      </Router>
-    </React.StrictMode>
+    <Router>
+      <Switch>
+        <Route path={REGISTER_URL} component={UserRegistration} />
+        <Route path={RESET_PASS_URL} component={PasswordResetting} />
+        <Route path={PASSWORD_RECOVERY_URL} component={PasswordRecovery} />
+        <Route path={LOGIN_URL} component={UserLogin} />
+        <Route path={HOME_URL} exact component={Main} />
+        <PrivateRoute path={PRIVATE_URL} component={Example} />
+      </Switch>
+    </Router>
   </Provider>,
   document.getElementById('root'),
 );

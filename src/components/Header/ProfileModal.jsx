@@ -17,7 +17,7 @@ const modalStyles = {
   },
 };
 
-export const ProfileModal = (props) => {
+export function ProfileModal(props) {
   const { isOpen, toggleProfileModal } = props;
   return (
     <Modal
@@ -29,7 +29,7 @@ export const ProfileModal = (props) => {
       <LogoutButton className={classes.logout} clickHandler={props.toggleProfileModal} />
     </Modal>
   );
-};
+}
 
 ProfileModal.defaultProps = {
   isOpen: false,

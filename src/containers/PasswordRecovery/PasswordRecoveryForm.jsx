@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
+import React, { memo, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import { recoverPassword } from '../../actions';
@@ -7,24 +7,22 @@ import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from '../Login/login.module.scss';
 import { validation } from './validationSchema';
 import { Input } from '../../components/FormElements/Input';
-import { getAuthErrorText } from '../../reducers/selectors/selectors_auth';
 
-const PasswordRecoveryForm = (props) => {
-  const { hash, recoverPassword } = props;
-
+export const PasswordRecoveryForm = memo((props) => {
+  const dispatch = useDispatch();
+  const { hash } = props;
   const initialValues = useMemo(() => ({
     hash,
     password: '',
     confirmPassword: '',
   }), [hash]);
-
   const handleSubmit = (values) => {
-    recoverPassword(values);
+    dispatch(recoverPassword(values));
   };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{ ...initialValues, hash }}
       enableReinitialize
       validationSchema={validation}
       onSubmit={handleSubmit}
@@ -53,25 +51,11 @@ const PasswordRecoveryForm = (props) => {
       </Form>
     </Formik>
   );
-};
-
-const mapStateToProps = state => {
-  return {
-    authError: getAuthErrorText(state),
-  };
-};
-
+});
 PasswordRecoveryForm.defaultProps = {
-  authError: '',
   hash: '',
 };
 
 PasswordRecoveryForm.propTypes = {
-  recoverPassword: PropTypes.func.isRequired,
-  authError: PropTypes.string,
   hash: PropTypes.string,
 };
-
-const Enhanced = connect(mapStateToProps, { recoverPassword })(PasswordRecoveryForm);
-
-export { Enhanced as PasswordRecoveryForm };

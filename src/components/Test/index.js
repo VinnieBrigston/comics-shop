@@ -6,7 +6,7 @@ import { LOGIN_URL } from '../../constants/routes';
 import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 
 
-const TestPrivate = ({ isAuthenticated, component: Component, path }) => {
+function PrivateRoute({ isAuthenticated, component: Component, path }) {
   return (
     <Route render={(routeProps) => {
       if (isAuthenticated) {
@@ -24,8 +24,7 @@ const TestPrivate = ({ isAuthenticated, component: Component, path }) => {
     }}
     />
   );
-};
-
+}
 
 const mapStateToProps = state => {
   return {
@@ -33,16 +32,16 @@ const mapStateToProps = state => {
   };
 };
 
-const Enhanced = connect(mapStateToProps)(TestPrivate);
+const Enhanced = connect(mapStateToProps)(PrivateRoute);
 
-TestPrivate.defaultProps = {
+PrivateRoute.defaultProps = {
   isAuthenticated: false,
 };
 
-TestPrivate.propTypes = {
+PrivateRoute.propTypes = {
   isAuthenticated: PropTypes.bool,
   component: PropTypes.element.isRequired,
   path: PropTypes.string.isRequired,
 };
 
-export { Enhanced as Testprivate };
+export { Enhanced as PrivateRoute };
