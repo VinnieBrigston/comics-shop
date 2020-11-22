@@ -12,6 +12,7 @@ export const PasswordRecoveryForm = memo((props) => {
   const dispatch = useDispatch();
   const { hash } = props;
   const initialValues = useMemo(() => ({
+    hash,
     password: '',
     confirmPassword: '',
   }), [hash]);
