@@ -14,19 +14,25 @@ export function Input(props) {
     type,
   } = props;
   return (
-    <div className={formClasses.inputWrapper}>
-      <input
-        className={`
-          ${formClasses.authInput} 
-          ${error && formClasses.authInput_withError} 
-          ${isHidden && formClasses.hiddenElement}
+    <div className={formClasses.inputElement}>
+      <div className={`
+          ${formClasses.inputWrapper}
+          ${error && formClasses.inputWrapper_withError} 
         `}
-        {...field}
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-      />
+      >
+        <input
+          className={`
+            ${formClasses.authInput} 
+            ${error && formClasses.authInput_withError} 
+            ${isHidden && formClasses.hiddenElement}
+          `}
+          {...field}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          type={type}
+        />
+      </div>
       {touched && error && (
         <div className={formClasses.errorMessage}>{error}</div>
       )}

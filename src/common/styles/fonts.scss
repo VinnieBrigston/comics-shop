@@ -1,14 +1,21 @@
 @font-face {
   font-family: 'Stinger';
-  src: url('../../assets/fonts/Stinger/Stinger-Bold-trial.ttf') format('truetype');
+  src: url('../../assets/fonts/Stinger/Stinger-Fit-Bold-trial.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Stinger';
-  src: url('../../assets/fonts/Stinger/Stinger-Regular-trial.ttf') format('truetype');
+  src: url('../../assets/fonts/Stinger/Stinger-Fit-Regular-trial.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Stinger';
+  src: url('../../assets/fonts/Stinger/Stinger-Fit-Thin-trial.ttf') format('truetype');
+  font-weight: 300;
   font-style: normal;
 }
 
@@ -16,5 +23,12 @@
   font-family: 'OpenSans';
   src: url('../../assets/fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url('../../assets/fonts/OpenSans/OpenSans-Bold.ttf') format('truetype');
+  font-weight: bold;
   font-style: normal;
 }

@@ -1,17 +1,46 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import classes from './header.module.scss';
-import { LOGIN_URL, REGISTER_URL } from '../../constants/routes';
+import { witAuthModal } from '../../containers/AuthModalProvider/withAuthModal';
+import { UserRegistration } from '../../containers/Registration';
+import { UserLogin } from '../../containers/Login';
 
-export function Controls() {
+function Controls(props) {
+  const {
+    modalContext: { showModal },
+  } = props;
+
+  const handleRegistrationClick = () => {
+    showModal(UserRegistration);
+  };
+  const handleLoginClick = () => {
+    showModal(UserLogin);
+  };
+
   return (
     <ul className={classes.suggestions}>
       <li>
-        <Link to={REGISTER_URL} className={classes.link}>Sign Up</Link>
+        <button
+          className={classes.link}
+          onClick={handleRegistrationClick}
+        >
+          Sign Up
+        </button>
       </li>
       <li>
-        <Link to={LOGIN_URL} className={classes.link}>Sign In</Link>
+        <button
+          className={classes.link}
+          onClick={handleLoginClick}
+        >
+          Sign In
+        </button>
       </li>
     </ul>
   );
 }
+
+Controls.propTypes = {
+  modalContext: PropTypes.object,
+};
+
+export default witAuthModal(Controls);

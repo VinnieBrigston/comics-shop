@@ -37,11 +37,12 @@ const updateUser = (res, dispatch) => {
   dispatch(authorizeUser({ token, userId }));
 };
 
-export const registerUser = ({ name, email, password }) => (dispatch) => {
+export const registerUser = ({ name, email, password }, callBackFunc) => (dispatch) => {
   dispatch(startAuthLoading());
   axios.post('auth/registration', { name, email, password })
     .then(res => {
       updateUser(res, dispatch);
+      callBackFunc();
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
@@ -50,12 +51,13 @@ export const registerUser = ({ name, email, password }) => (dispatch) => {
     .finally(() => dispatch(stopAuthLoading));
 };
 
-export const logInUser = ({ email, password }) => (dispatch) => {
+export const logInUser = ({ email, password }, callBackFunc) => (dispatch) => {
   dispatch(startAuthLoading());
   const data = { email, password };
   axios.post('auth/login', data)
     .then(res => {
       updateUser(res, dispatch);
+      callBackFunc();
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
@@ -66,7 +68,7 @@ export const logInUser = ({ email, password }) => (dispatch) => {
 
 export const resetPassword = ({ email }) => (dispatch) => {
   dispatch(startAuthLoading());
-  axios.post('auth/reset-password', { email })
+  axios.post('auth/recover', { email })
     .then(() => {
       dispatch(sendRecoveryLink());
     })
@@ -94,7 +96,7 @@ export const validateResetHash = (hash) => (dispatch) => {
 export const recoverPassword = ({ hash, password }) => (dispatch) => {
   dispatch(startAuthLoading());
   const data = { hash, password };
-  axios.post('auth/recover-password', data)
+  axios.post('auth/restore', data)
     .then((res) => {
       updateUser(res, dispatch);
     })

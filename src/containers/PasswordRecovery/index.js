@@ -22,20 +22,23 @@ export function PasswordRecovery(props) {
 
   useEffect(() => {
     const hashFromUrl = props.match?.params?.hash;
+    console.log('hashFromUrl:', hashFromUrl)
     setHash(hashFromUrl);
-    if (hashFromUrl) dispatch(validateResetHash(hash));
+    if (hashFromUrl) dispatch(validateResetHash(hashFromUrl));
   }, []);
 
   return isAuthenticated
     ? <Redirect to={HOME_URL} />
     : hashIsValid
       ? (
-        <div className={registrationClasses.wrapper}>
-          <h2 className={formClasses.authTitle}>Password Recovery</h2>
-          <PasswordRecoveryForm hash={hash} />
-          <Link to={HOME_URL} className={formClasses.authBackLink}>
-            <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
-          </Link>
+        <div className={formClasses.authWrapper}>
+          <div className={registrationClasses.wrapper}>
+            <h2 className={formClasses.authTitle}>Password Recovery</h2>
+            <PasswordRecoveryForm hash={hash} />
+            <Link to={HOME_URL} className={formClasses.authBackLink}>
+              <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
+            </Link>
+          </div>
         </div>
       )
       : (

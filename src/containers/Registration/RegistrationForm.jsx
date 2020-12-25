@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { registerUser } from '../../actions';
@@ -14,14 +15,15 @@ const initialValues = {
   confirmPassword: '',
 };
 
-export const RegistrationForm = memo(() => {
+export const RegistrationForm = memo((props) => {
   const dispatch = useDispatch();
+  const { hideModal } = props;
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validation}
       onSubmit={values => {
-        dispatch(registerUser(values));
+        dispatch(registerUser(values, hideModal));
       }}
     >
       <Form className={`${formClasses.form} ${registrationClasses.registrationForm}`}>
@@ -54,3 +56,7 @@ export const RegistrationForm = memo(() => {
     </Formik>
   );
 });
+
+RegistrationForm.propTypes = {
+  hideModal: PropTypes.func,
+};
