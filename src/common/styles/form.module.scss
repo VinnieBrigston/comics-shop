@@ -138,7 +138,6 @@
   width: 50px;
   z-index: 6;
   &:hover + .overlay {
-    // clip-path:  polygon(0% 0%, 0% 0%, 95% 0%, 100% 7.9%, 100% 100%, 100% 100%, 0% 100%, 0 100%);
     clip-path:  polygon(0% 0%, 0% 0%, calc(100% - 51px) 0%, 100% 7.9%, 100% 100%, 100% 100%, 0% 100%, 0 100%);
     &:before {
       box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.3);

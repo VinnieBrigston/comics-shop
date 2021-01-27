@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Profile } from './Profile';
-import Controls from './Controls';
+import { Controls } from './Controls';
 import { ProfileModal } from './ProfileModal';
 import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
 import classes from './header.module.scss';

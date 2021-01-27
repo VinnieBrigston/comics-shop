@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { ResetForm } from './ResetForm.jsx';
 import loginPageClasses from '../Login/login.module.scss';
 import formClasses from '../../common/styles/form.module.scss';
 import { resetErrorMessages } from '../../actions';
 import { checkSendingLink } from '../../reducers/selectors/selectors_auth';
 
-export function PasswordResetting() {
+export function PasswordResetting(props) {
   const dispatch = useDispatch();
   const resetLinkIsSent = useSelector(checkSendingLink);
+  const { hideModal } = props;
 
   useEffect(() => {
     return () => {
@@ -25,8 +27,12 @@ export function PasswordResetting() {
             Recovery link was sent on your email. Please check
           </h3>
         )
-        : <ResetForm />
+        : <ResetForm hideModal={hideModal} />
       }
     </div>
   );
 }
+
+PasswordResetting.propTypes = {
+  hideModal: PropTypes.func.isRequired,
+};

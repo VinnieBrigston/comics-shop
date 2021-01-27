@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
+import cn from 'classnames';
 import formClasses from '../../common/styles/form.module.scss';
 
 export function Input(props) {
@@ -15,17 +16,22 @@ export function Input(props) {
   } = props;
   return (
     <div className={formClasses.inputElement}>
-      <div className={`
-          ${formClasses.inputWrapper}
-          ${error && formClasses.inputWrapper_withError} 
-        `}
+      <div
+        className={
+          cn(
+            formClasses.inputWrapper,
+            { [formClasses.inputWrapper_withError]: error },
+          )
+        }
       >
         <input
-          className={`
-            ${formClasses.authInput} 
-            ${error && formClasses.authInput_withError} 
-            ${isHidden && formClasses.hiddenElement}
-          `}
+          className={
+            cn(
+              formClasses.authInput,
+              { [formClasses.authInput_withError]: error },
+              { [formClasses.hiddenElement]: isHidden },
+            )
+          }
           {...field}
           id={id}
           name={name}

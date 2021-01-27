@@ -47,5 +47,5 @@ export const LoginForm = memo((props) => {
 });
 
 LoginForm.propTypes = {
-  hideModal: PropTypes.func,
+  hideModal: PropTypes.func.isRequired,
 };

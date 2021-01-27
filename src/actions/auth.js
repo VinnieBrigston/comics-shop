@@ -37,12 +37,12 @@ const updateUser = (res, dispatch) => {
   dispatch(authorizeUser({ token, userId }));
 };
 
-export const registerUser = ({ name, email, password }, callBackFunc) => (dispatch) => {
+export const registerUser = ({ name, email, password }, onSucceed) => (dispatch) => {
   dispatch(startAuthLoading());
   axios.post('auth/registration', { name, email, password })
     .then(res => {
       updateUser(res, dispatch);
-      callBackFunc();
+      onSucceed();
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
@@ -51,13 +51,13 @@ export const registerUser = ({ name, email, password }, callBackFunc) => (dispat
     .finally(() => dispatch(stopAuthLoading));
 };
 
-export const logInUser = ({ email, password }, callBackFunc) => (dispatch) => {
+export const logInUser = ({ email, password }, onSucceed) => (dispatch) => {
   dispatch(startAuthLoading());
   const data = { email, password };
   axios.post('auth/login', data)
     .then(res => {
       updateUser(res, dispatch);
-      callBackFunc();
+      onSucceed();
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
@@ -66,11 +66,12 @@ export const logInUser = ({ email, password }, callBackFunc) => (dispatch) => {
     .finally(() => dispatch(stopAuthLoading));
 };
 
-export const resetPassword = ({ email }) => (dispatch) => {
+export const resetPassword = ({ email }, onSucceed) => (dispatch) => {
   dispatch(startAuthLoading());
   axios.post('auth/recover', { email })
     .then(() => {
       dispatch(sendRecoveryLink());
+      onSucceed();
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.error;
@@ -88,17 +89,18 @@ export const validateResetHash = (hash) => (dispatch) => {
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.message;
-      dispatch(handleResetHashValidity({ hashIsValid: true, message: errorMessage }));
+      dispatch(handleResetHashValidity({ hashIsValid: false, message: errorMessage }));
     })
     .finally(() => dispatch(stopAuthLoading));
 };
 
-export const recoverPassword = ({ hash, password }) => (dispatch) => {
+export const recoverPassword = ({ hash, password }, onSucceed) => (dispatch) => {
   dispatch(startAuthLoading());
   const data = { hash, password };
   axios.post('auth/restore', data)
     .then((res) => {
       updateUser(res, dispatch);
+      onSucceed();
     })
     .catch(error => {
       const errorMessage = error.response?.data?.message?.message;

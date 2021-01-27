@@ -9,16 +9,14 @@ export function AuthModal(props) {
     showModal,
   } = props;
 
-  const handleAuthModalClosing = () => {
-    hideModal();
-  };
+  const hash = props.hash ? props.hash : null;
 
   return (
     <div className={formClasses.authWrapper}>
-      <Component hideModal={hideModal} showModal={showModal} />
+      <Component hideModal={hideModal} showModal={showModal} hash={hash} />
       <button
         className={formClasses.authBackLink}
-        onClick={handleAuthModalClosing}
+        onClick={hideModal}
       >
       </button>
       <div className={formClasses.overlay}></div>
@@ -26,8 +24,13 @@ export function AuthModal(props) {
   );
 }
 
+AuthModal.defaultProps = {
+  hash: '',
+};
+
 AuthModal.propTypes = {
-  component: PropTypes.any,
-  hideModal: PropTypes.func,
-  showModal: PropTypes.func,
+  component: PropTypes.any.isRequired,
+  hideModal: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
+  hash: PropTypes.string,
 };

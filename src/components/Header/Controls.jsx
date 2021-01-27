@@ -43,4 +43,7 @@ Controls.propTypes = {
   modalContext: PropTypes.object,
 };
 
-export default witAuthModal(Controls);
+const Enhanced = witAuthModal(Controls);
+Enhanced.displayName = 'Controls';
+
+export { Enhanced as Controls };
