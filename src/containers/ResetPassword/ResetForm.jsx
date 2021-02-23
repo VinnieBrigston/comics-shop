@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { Formik, Form } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { resetPassword } from '../../actions';
 import formClasses from '../../common/styles/form.module.scss';
 import loginPageClasses from '../Login/login.module.scss';
@@ -12,15 +13,16 @@ const initialValues = {
   email: '',
 };
 
-export const ResetForm = memo(() => {
+export const ResetForm = memo((props) => {
   const dispatch = useDispatch();
   const authError = useSelector(getAuthErrorText);
+  const { hideModal } = props;
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validation}
       onSubmit={values => {
-        dispatch(resetPassword(values));
+        dispatch(resetPassword(values, hideModal));
       }}
     >
       <Form className={`${formClasses.form} ${loginPageClasses.loginForm}`}>
@@ -36,3 +38,7 @@ export const ResetForm = memo(() => {
     </Formik>
   );
 });
+
+ResetForm.propTypes = {
+  hideModal: PropTypes.func.isRequired,
+};

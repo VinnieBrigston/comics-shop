@@ -10,14 +10,14 @@ import { Input } from '../../components/FormElements/Input';
 
 export const PasswordRecoveryForm = memo((props) => {
   const dispatch = useDispatch();
-  const { hash } = props;
+  const { hash, hideModal } = props;
   const initialValues = useMemo(() => ({
     hash,
     password: '',
     confirmPassword: '',
   }), [hash]);
   const handleSubmit = (values) => {
-    dispatch(recoverPassword(values));
+    dispatch(recoverPassword(values, hideModal));
   };
 
   return (
@@ -58,4 +58,5 @@ PasswordRecoveryForm.defaultProps = {
 
 PasswordRecoveryForm.propTypes = {
   hash: PropTypes.string,
+  hideModal: PropTypes.func.isRequired,
 };

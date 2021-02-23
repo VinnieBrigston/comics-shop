@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { ResetForm } from './ResetForm.jsx';
 import loginPageClasses from '../Login/login.module.scss';
 import formClasses from '../../common/styles/form.module.scss';
-import closeIcon from '../../assets/images/icons/close.svg';
-import { HOME_URL } from '../../constants/routes';
 import { resetErrorMessages } from '../../actions';
 import { checkSendingLink } from '../../reducers/selectors/selectors_auth';
 
-export function PasswordResetting() {
+export function PasswordResetting(props) {
   const dispatch = useDispatch();
   const resetLinkIsSent = useSelector(checkSendingLink);
+  const { hideModal } = props;
 
   useEffect(() => {
     return () => {
@@ -28,11 +27,12 @@ export function PasswordResetting() {
             Recovery link was sent on your email. Please check
           </h3>
         )
-        : <ResetForm />
+        : <ResetForm hideModal={hideModal} />
       }
-      <Link to={HOME_URL} className={formClasses.authBackLink}>
-        <img className={formClasses.authCloseIcon} src={closeIcon} alt="close page" />
-      </Link>
     </div>
   );
 }
+
+PasswordResetting.propTypes = {
+  hideModal: PropTypes.func.isRequired,
+};

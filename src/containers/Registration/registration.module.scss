@@ -1,17 +1,15 @@
 .wrapper {
   align-items: center;
-  background-image: url('../../assets/images/backgrounds/registration-bg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
   box-sizing: border-box;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding-top: 90px;
   position: relative;
   width: 100%;
+  z-index: 5;
   @media (max-width: 1370px) {
-    padding-top: 20px;
+    padding-top: 40px;
   }
 }
 
