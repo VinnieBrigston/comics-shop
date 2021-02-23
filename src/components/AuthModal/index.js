@@ -7,9 +7,8 @@ export function AuthModal(props) {
     component: Component,
     hideModal,
     showModal,
+    hash,
   } = props;
-
-  const hash = props.hash ? props.hash : null;
 
   return (
     <div className={formClasses.authWrapper}>
@@ -25,7 +24,7 @@ export function AuthModal(props) {
 }
 
 AuthModal.defaultProps = {
-  hash: '',
+  hash: null,
 };
 
 AuthModal.propTypes = {

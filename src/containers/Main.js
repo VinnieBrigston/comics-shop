@@ -24,9 +24,7 @@ function Main(props) {
   }, []);
 
   return (
-    <React.Fragment>
-      <Header />
-    </React.Fragment>
+    <Header />
   );
 }
 
