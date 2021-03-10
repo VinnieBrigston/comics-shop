@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import classes from './header.module.scss';
-import { logout } from '../../actions';
+import { logout } from '../../modules/Authentication/store/actions';
 
 export function LogoutButton(props) {
   const { clickHandler } = props;

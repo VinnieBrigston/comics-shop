@@ -1,4 +1,4 @@
-import { localStore } from '../utilities/storage';
+import { localStore } from '../modules/Authorization/utilities/storage';
 
 export const loadState = (key) => {
   try {

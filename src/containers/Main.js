@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-import { witAuthModal } from './AuthModalProvider/withAuthModal';
+import { witAuthModal } from '../modules/Authorization/components/AuthModalProvider/withAuthModal';
 import { Header } from '../components/Header';
-import { PasswordRecovery } from './PasswordRecovery';
+import { PasswordRecovery } from '../modules/Authorization/components/PasswordRecovery';
 
 function Main(props) {
   function useQuery() {

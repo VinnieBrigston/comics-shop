@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { LOGIN_URL } from '../../constants/routes';
-import { getAuthenticatedStatus } from '../../reducers/selectors/selectors_user';
+import { LOGIN_URL } from '../../modules/Authorization/constants/routes';
+import { getAuthenticatedStatus } from '../../modules/Authentication/store/selectors';
 
 
 function PrivateRoute({ isAuthenticated, component: Component, path }) {
