@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-import { witAuthModal } from '../modules/Authorization/components/AuthModalProvider/withAuthModal';
-import { Header } from '../components/Header';
-import { PasswordRecovery } from '../modules/Authorization/components/PasswordRecovery';
+import { witAuthModal } from '../Authorization/components/AuthModalProvider/withAuthModal';
+import { Page } from '../../common/components/Page';
+import { PasswordRecovery } from '../Authorization/components/PasswordRecovery';
 
 function Main(props) {
   function useQuery() {
@@ -24,7 +24,9 @@ function Main(props) {
   }, []);
 
   return (
-    <Header />
+    <Page>
+      <h1>Homepage</h1>
+    </Page>
   );
 }
 

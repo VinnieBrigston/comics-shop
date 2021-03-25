@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
-import { setAuthorizationToken } from '../../../../vendor/axios/private';
-import { saveState, removeState } from '../../../../helpers/localStorage';
+import { setAuthorizationToken } from '../../../vendor/axios/private';
+import { saveState, removeState } from '../../../services/storage/localStorage';
 
 export const logOutUser = createAction('LOG_OUT_USER');
 export const startAuthLoading = createAction('START_AUTH');

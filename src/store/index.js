@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './root_reducer';
-import { loadState } from '../helpers/localStorage';
+import { loadState } from '../services/storage/localStorage';
 import { configurateInterceptors, setAuthorizationToken } from '../vendor/axios/private';
 import { getUserToken } from '../modules/Authentication/store/selectors';
 

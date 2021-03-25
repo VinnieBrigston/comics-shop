@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Profile } from './Profile';
 import { Controls } from './Controls';
 import { ProfileModal } from './ProfileModal';
-import { getAuthenticatedStatus } from '../../modules/Authentication/store/selectors';
+import { getAuthenticatedStatus } from '../../../modules/Authentication/store/selectors';
 import classes from './header.module.scss';
 
 export function Header() {

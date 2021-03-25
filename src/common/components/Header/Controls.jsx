@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './header.module.scss';
-import { witAuthModal } from '../../modules/Authorization/components/AuthModalProvider/withAuthModal';
-import { UserRegistration } from '../../modules/Authorization/components/Registration';
-import { UserLogin } from '../../modules/Authorization/components/Login';
+import { witAuthModal } from '../../../modules/Authorization/components/AuthModalProvider/withAuthModal';
+import { UserRegistration } from '../../../modules/Authorization/components/Registration';
+import { UserLogin } from '../../../modules/Authorization/components/Login';
 
 function Controls(props) {
   const {

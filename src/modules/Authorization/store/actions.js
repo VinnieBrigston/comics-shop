@@ -1,10 +1,10 @@
 import { createAction } from 'redux-actions';
-import axios from '../../../../vendor/axios';
+import axios from '../../../vendor/axios';
 import {
   startAuthLoading,
   stopAuthLoading,
   updateUser,
-} from '../../../Authentication/store/actions';
+} from '../../Authentication/store/actions';
 
 
 export const notifyRequestError = createAction('NOTIFY_REQUEST_ERROR');

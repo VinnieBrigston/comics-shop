@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 import {
   authorizeUser,
   logOutUser,
-} from '../actions';
+} from './actions';
 
 const initialState = {
   token: null,

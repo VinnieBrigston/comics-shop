@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './header.module.scss';
-import ProfileIcon from '../../assets/images/user.svg';
+import ProfileIcon from '../../../assets/images/user.svg';
 
 export function Profile(props) {
   return (

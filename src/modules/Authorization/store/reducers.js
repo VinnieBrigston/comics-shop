@@ -3,14 +3,14 @@ import { handleActions } from 'redux-actions';
 import {
   startAuthLoading,
   stopAuthLoading,
-} from '../../../Authentication/store/actions';
+} from '../../Authentication/store/actions';
 
 import {
   notifyRequestError,
   sendRecoveryLink,
   handleResetHashValidity,
   resetErrorMessages,
-} from '../actions';
+} from './actions';
 
 const initialState = {
   isLoading: false,
