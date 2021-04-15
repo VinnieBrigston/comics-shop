@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { rootReducer } from '../reducers';
-import { loadState } from '../helpers/localStorage';
+import { rootReducer } from './root_reducer';
+import { loadState } from '../services/storage/localStorage';
 import { configurateInterceptors, setAuthorizationToken } from '../vendor/axios/private';
-import { getUserToken } from '../reducers/selectors/selectors_user';
+import { getUserToken } from '../modules/Authentication/store/selectors';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

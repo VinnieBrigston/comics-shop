@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { logout } from '../../actions';
+import { logout } from '../../modules/Authentication/store/actions';
 
 const privateInstance = axios.create({
   baseURL: process.env.REACT_APP_PRIVATE_BASE_URL,
