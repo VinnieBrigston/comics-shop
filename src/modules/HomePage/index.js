@@ -4,6 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { witAuthModal } from '../Authorization/components/AuthModalProvider/withAuthModal';
 import { Page } from '../../common/components/Page';
 import { PasswordRecovery } from '../Authorization/components/PasswordRecovery';
+import { Banner } from './Banner';
+import { HomeTicker } from './HomeTicker';
+import classes from './homepage.module.scss';
 
 function Main(props) {
   function useQuery() {
@@ -25,7 +28,10 @@ function Main(props) {
 
   return (
     <Page>
-      <h1>Homepage</h1>
+      <section className={classes.hero}>
+        <Banner />
+        <HomeTicker />
+      </section>
     </Page>
   );
 }

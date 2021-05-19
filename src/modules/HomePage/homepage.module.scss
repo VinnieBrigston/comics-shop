@@ -1,0 +1,10 @@
+@import "../../common/styles/variables.scss";
+
+* { box-sizing: border-box; }
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - #{$header-height});
+  width: 100%;
+}

@@ -1,0 +1,78 @@
+@import "../../../common/styles/variables.scss";
+
+.banners {
+  display: block;
+  flex-grow: 15;
+  width: 100%;
+}
+
+.banner {
+  padding-bottom: 2rem;
+  padding-left: 13%;
+  padding-top: 105px;
+  position: relative;
+}
+
+.banner:focus {
+  outline: none;
+}
+
+.bannerCard {
+  background-color: #fff;
+  box-shadow: 19px 21px 0 #333333;
+  display: inline-block;
+  height: 19%;
+  padding-bottom: 32px;
+  padding-left: 52px;
+  padding-top: 16px;
+  text-align: left;
+  width: 50%;
+}
+
+.bannerText {
+  font-family: $font-secondary;
+  font-size: 3.125rem;
+  font-weight: 700;
+  margin: 0;
+  width: 70%;
+}
+
+.bannerImage {
+  display: inline-block;
+  height: 870px;
+  margin: 0;
+  // position: absolute;
+  // right: 10%;
+  // top: 0;
+  width: auto;
+  z-index: 5;
+  img {
+    display: inline-block;
+    height: auto;
+    width: 100%;
+  }
+}
+
+.bannerMiles {
+  margin: 0 5% 0 0;
+}
+
+.images {
+  display: inline-block;
+  // height: 100vh;
+  padding-top: 5%;
+  position: absolute;
+  text-align: right;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+
+.number {
+  font-family: $font-primary;
+}
+
+.slick-slide > div:focus {
+  outline: none;
+}

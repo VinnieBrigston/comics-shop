@@ -9,7 +9,7 @@ import { AuthModalProvider } from './modules/Authorization/components/AuthModalP
 import {
   HOME_URL,
   RESET_PASS_URL,
-} from './modules/Authorization/constants/routes';
+} from './common/constants/routes';
 import 'normalize.css';
 
 ReactDOM.render(

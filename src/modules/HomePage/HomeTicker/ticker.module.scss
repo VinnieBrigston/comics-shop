@@ -1,0 +1,12 @@
+@import "../../../common/styles/variables.scss";
+
+.tickerWrapper {
+  flex-grow: 1;
+}
+
+.ticker {
+  font-family: $font-secondary;
+  font-size: 4.375rem;
+  font-weight: 300;
+  text-transform: uppercase;
+}
